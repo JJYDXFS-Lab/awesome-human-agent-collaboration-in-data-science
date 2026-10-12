@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "scanned_records": 81879,
+  "accepted_records": 61930,
+  "prefilter_candidates": 1180,
+  "candidate_papers": 538,
+  "keep_papers": 135,
+  "borderline_papers": 403,
+  "deep_analysis_papers": 81,
+  "funnel": [
+    {
+      "label": "Metadata records",
+      "value": 81879
+    },
+    {
+      "label": "Accepted papers",
+      "value": 61930
+    },
+    {
+      "label": "Prefilter candidates",
+      "value": 1180
+    },
+    {
+      "label": "Keep + borderline",
+      "value": 538
+    }
+  ],
+  "source_hashes": {
+    "main_corpus": "d45a8b9ea79094d53c75763b6f548fbbb9508ae61561929039dd1c6fc0cb0b56",
+    "main_prefilter": "0f2557664683514216a6f89f2c8d9712da25f9f80c688be8164edd110b9e4b75",
+    "main_triage": "7f82742d9e5e00127ea7a7d4f2d30ba0e27deaa8a662db08a809b9ff30484b81",
+    "paper_cards": "6bec21f54c2a624ed55b7c9d303dda3739e0ef82c4eadd0fa4df3625e8cf6e32"
+  },
+  "scope_notes": {
+    "scanned_records": "Promoted main corpus records, not deduplicated unique works.",
+    "accepted_records": "Promoted main corpus records with accepted status, without identity deduplication.",
+    "prefilter_candidates": "Raw candidate record count in the promoted main prefilter output, without identity deduplication.",
+    "candidate_papers": "Unique keep plus borderline papers in the promoted main triage output.",
+    "deep_analysis_papers": "Unique papers with cards in the standing Stage 5 aggregate, including boundary and reference papers; not seed targets or PDF counts.",
+    "identity": "Triage uses source-scoped IDs or links, with title, venue and year as fallback. Cards use links and normalized titles or curated aliases. Conflicting duplicate verdicts are rejected.",
+    "provenance": "SHA-256 hashes cover the exact input bytes. Pending impact runs, cache directories and summary counts are excluded. This is a snapshot, not a live counter."
+  }
+}

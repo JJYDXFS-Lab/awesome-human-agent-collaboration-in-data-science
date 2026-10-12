@@ -16,14 +16,20 @@ research resource, not a completed or peer-reviewed systematic review.
 
 **[Open the website](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/)**
 
-The homepage provides conference coverage, reading context, and links to all
-reports. A useful reading order is:
+The Overview starts with conference coverage and the screening funnel. Use
+the shared navigation to explore:
 
-1. **Literature Review Pipeline**: how collected metadata becomes a human-selected research set.
-2. **3D Research Space**: selected papers, research dimensions, and within-set citation relationships.
-3. **Evidence Audit**: extracted passages, paper provenance, and locations for checking interpretations.
-4. **Challenge Landscape**: challenge definitions, supporting evidence, semantic maps, and temporal/community views.
-5. **Error Analysis Pipeline**: how extraction and evidence merging feed the synthesis.
+- **Papers**: searchable screened candidates, including abstracts and screening rationale.
+- **Benchmarks**: datasets and evaluation resources introduced or extended by candidate papers, with metadata evidence excerpts.
+- **Conferences**: screened candidate distributions by venue and year, conference browsing links, and separate raw corpus coverage counts.
+- **Research Space**: selected papers, research dimensions, and within-set citation relationships.
+- **Challenges**: challenge definitions, supporting evidence, semantic maps, and temporal/community views.
+- **About**: scope, limitations, and the literature-review and evidence-synthesis methodologies.
+
+Benchmark labels are LLM-assisted interpretations of titles and abstracts,
+not full-paper validation or a count of unique datasets. The Evidence Audit
+preserves original passages and locations for inspecting the
+interpretations in the challenge analysis.
 
 The Corpus Dashboard, Triage Browser, and Bucket Intersections provide broader
 coverage and screening context. On GitHub, HTML files display as source; use
@@ -92,6 +98,7 @@ literature-review pipeline.
 - `pages/`: bundled reports, including their embedded display data.
 - `assets/`: local visualization libraries and shared styles.
 - `coverage.json`: conference coverage snapshot used by the homepage.
+- `statistics.json`: collection counts and input hashes behind the overview funnel.
 - `manifest.json`: package file hashes and upstream source-path references.
 - `.nojekyll`: serves the bundle as plain static files on GitHub Pages.
 
