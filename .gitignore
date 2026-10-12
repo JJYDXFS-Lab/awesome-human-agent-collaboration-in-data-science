@@ -1,0 +1,7 @@
+.DS_Store
+.wrangler/
+.env
+.env.*
+*.log
+*.tmp
+__pycache__/

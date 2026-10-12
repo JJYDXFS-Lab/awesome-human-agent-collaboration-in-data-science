@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paper Scanner Report</title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --panel: #fffdf8;
+      --ink: #1b1b1b;
+      --muted: #5c5a54;
+      --accent: #0f766e;
+      --accent-2: #c2410c;
+      --accent-3: #1d4ed8;
+      --line: #d9d1c3;
+      --shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+      background: linear-gradient(180deg, #f7f3ea 0%, #efe6d7 100%);
+      color: var(--ink);
+    }
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 20px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 20px 20px 18px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 44px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .stat {
+      padding: 14px 14px 12px;
+      border-radius: 14px;
+      background: #faf4eb;
+      border: 1px solid #eadfcc;
+    }
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .wide {
+      grid-column: 1 / -1;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+    .chart {
+      width: 100%;
+      min-height: 320px;
+    }
+    .chart.tall {
+      min-height: 420px;
+    }
+    .legend-note {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+      margin-top: -2px;
+      margin-bottom: 12px;
+    }
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .example {
+      background: #f7f1e6;
+      border: 1px solid #eadfcc;
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .example .meta {
+      color: var(--accent-3);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .example .title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .example .why {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 980px) {
+      .hero, .grid, .examples {
+        grid-template-columns: 1fr;
+      }
+      h1 { font-size: 34px; }
+    }
+  </style>
+<link rel="stylesheet" href="../assets/hub.css">
+</head>
+<body><!-- hub:start --><div class="hub-tools"><a href="../index.html">&larr; Project Hub</a><details><summary>All reports</summary><nav aria-label="Project reports"><a href="stage5_research_space_3d.html">3D Research Space</a><a href="audit_browser_all_merged.html">Evidence Audit</a><a href="cluster_visual_space.html">Challenge Landscape</a><a href="visualization_report.html" aria-current="page">Corpus Dashboard</a><a href="triage_browser.html">Triage Browser</a><a href="intersection_browser.html">Bucket Intersections</a><a href="literature_review_pipeline.html">Literature Review Pipeline</a><a href="error_analysis_synthesis_pipeline.html">Error Analysis Pipeline</a></nav></details></div><!-- hub:end -->
+  <div class="wrap">
+    <section class="hero">
+      <div class="card">
+        <h1>Paper Scanner Report</h1>
+        <p class="subtitle">A compact view of the funnel from raw venue harvest to local prefilter and LLM triage. This report is optimized for quick inspection while manually reviewing titles and abstracts.</p>
+      </div>
+      <div class="card">
+        <div class="stats">
+          <div class="stat"><div class="stat-label">All Papers</div><div class="stat-value">81879</div></div>
+          <div class="stat"><div class="stat-label">Accepted</div><div class="stat-value">61930</div></div>
+          <div class="stat"><div class="stat-label">Prefilter Candidates</div><div class="stat-value">1180</div></div>
+          <div class="stat"><div class="stat-label">Triage Keep</div><div class="stat-value">538</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Filtering Funnel</h2>
+        <div id="funnel" class="chart"></div>
+      </div>
+      <div class="card">
+        <h2>Triage Verdicts</h2>
+        <div id="verdictDistribution" class="chart"></div>
+      </div>
+
+      <div class="card wide">
+        <h2>Venue-Year Heatmaps</h2>
+        <p class="legend-note">Accepted raw corpus, prefilter candidates, and triage-retained pool shown as separate cards for easier reading.</p>
+        <div class="examples">
+          <div>
+            <div id="rawHeatmap" class="chart tall"></div>
+          </div>
+          <div>
+            <div id="prefilterHeatmap" class="chart tall"></div>
+          </div>
+          <div>
+            <div id="triageHeatmap" class="chart tall"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Bucket Overlap</h2>
+        <div id="bucketOverlap" class="chart"></div>
+      </div>
+      <div class="card">
+        <h2>Tier Distribution</h2>
+        <div id="tierDistribution" class="chart"></div>
+      </div>
+
+      <div class="card">
+        <h2>Bucket Combinations</h2>
+        <div id="bucketCombos" class="chart tall"></div>
+      </div>
+      <div class="card">
+        <h2>Triage Verdict by Venue</h2>
+        <div id="verdictByVenue" class="chart tall"></div>
+      </div>
+
+      <div class="card wide">
+        <h2>Matched Keyword Frequency</h2>
+        <p class="legend-note">Top matched keyword strings from the current prefilter candidates, separated by bucket.</p>
+        <div id="keywordCharts" class="chart tall"></div>
+      </div>
+
+      <div class="card wide">
+        <h2>Sample Keep Papers</h2>
+        <div class="examples">
+          <div class="example"><div class="meta">CHI 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">Data Formulator 2: Iterative Creation of Data Visualizations, with AI Transforming Data Along the Way</div><div class="why">Directly targets iterative human-AI data visualization authoring where users specify intent and delegate data transformation to AI in exploratory analysis workflows.</div></div><div class="example"><div class="meta">ICLR.cc 2026 · tier3_two_buckets_with_human_or_agent</div><div class="title">AI-for-Science Low-code Platform with Bayesian Adversarial Multi-Agent Framework</div><div class="why">This low-code AI-for-science platform explicitly coordinates multiple LLM agents with human-AI collaboration for scientific code generation and non-expert user workflows.</div></div><div class="example"><div class="meta">ICML.cc 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">Are Large Language Models Ready for Multi-Turn Tabular Data Analysis?</div><div class="why">Directly targets human-machine conversational tabular data analysis with multi-turn interaction and practical scenarios, aligning strongly with interactive data science workflows.</div></div><div class="example"><div class="meta">CHI 2024 · tier3_two_buckets_with_human_or_agent</div><div class="title">Marco: Supporting Business Document Workflows via Collection-Centric Information Foraging with Large Language Models</div><div class="why">A mixed-initiative LLM workspace for real-world document collection sensemaking with interactive user-AI schema and information foraging support.</div></div><div class="example"><div class="meta">CHI 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">ChainBuddy: An AI-assisted Agent System for Generating LLM Pipelines</div><div class="why">A user-facing AI workflow assistant for generating and evaluating LLM pipelines with attention to expertise, workload, and over-reliance.</div></div><div class="example"><div class="meta">CHI 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">Do It For Me vs. Do It With Me: Investigating User Perceptions of Different Paradigms of Automation in Copilots for Feature-Rich Software</div><div class="why">Directly compares automation paradigms and user control in LLM copilots across data analysis and design tasks, aligning with division of labor in interactive software workflows.</div></div><div class="example"><div class="meta">CHI 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">Generative AI in Knowledge Work: Design Implications for Data Navigation and Decision-Making</div><div class="why">Directly addresses GenAI support for knowledge work involving data navigation, synthesis, decision-making, user control, transparency, and workflow-adaptive collaboration.</div></div><div class="example"><div class="meta">CHI 2026 · tier3_two_buckets_with_human_or_agent</div><div class="title">Augmenting Clinical Decision-Making with an Interactive and Interpretable AI Copilot: A Real-World User Study with Clinicians in Nephrology and Obstetrics</div><div class="why">An interactive AI copilot for clinicians using longitudinal EHR data with explicit verification, expertise differences, and collaborative decision-making in a real-world workflow.</div></div><div class="example"><div class="meta">CHI 2026 · tier3_two_buckets_with_human_or_agent</div><div class="title">Cocoa: Co-Planning and Co-Execution with AI Agents</div><div class="why">Directly addresses human-agent co-planning, co-execution, delegation, and interleaved execution for complex research tasks with notebook-inspired workflows.</div></div><div class="example"><div class="meta">CHI 2026 · tier3_two_buckets_with_human_or_agent</div><div class="title">DiagLink: A Dual-User Diagnostic Assistance System by Synergizing Experts with LLMs and Knowledge Graphs</div><div class="why">A dual-user LLM and knowledge-graph diagnostic system with guided dialogue, physician oversight, role-adaptive interfaces, and collaborative reasoning in a real workflow.</div></div><div class="example"><div class="meta">ICLR.cc 2026 · tier3_two_buckets_with_human_or_agent</div><div class="title">Collaborative Gym: A Framework for Enabling and Evaluating Human-Agent Collaboration</div><div class="why">Directly matches the anchor with bidirectional human-agent collaboration, flexible coordination, real-user evaluation, and a tabular data analysis task.</div></div><div class="example"><div class="meta">ACL 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">Controllable and Reliable Knowledge-Intensive Task-Oriented Conversational Agents with Declarative Genie Worksheets</div><div class="why">Genie centrally addresses controllable task-oriented conversational agents for complex user interactions with policy and state-management mechanisms plus a user study, though not specifically data/graph focused.</div></div><div class="example"><div class="meta">CHI 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">Beyond Code Generation: LLM-supported Exploration of the Program Design Space</div><div class="why">An LLM-supported IDE for iterative program design explicitly studies programmer-agent interaction, design decisions, and information handoff, adjacent to data-science coding workflows.</div></div><div class="example"><div class="meta">CHI 2025 · tier3_two_buckets_with_human_or_agent</div><div class="title">Interactive Debugging and Steering of Multi-Agent AI Systems</div><div class="why">Directly studies interfaces for developers to debug and steer multi-agent AI systems in complex agentic workflows, despite limited data or graph specificity.</div></div><div class="example"><div class="meta">CHI 2026 · tier3_two_buckets_with_human_or_agent</div><div class="title">ClearFairy: Capturing Creative Workflows through Decision Structuring, In-Situ Questioning, and Rationale Inference</div><div class="why">Strong example of an AI assistant capturing professional workflow rationales through in-situ questioning, though in UI/UX design rather than data or graph analysis.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">
+      Generated from local JSON outputs only. No notebook required.
+    </p>
+  </div>
+
+  <script src="../assets/plotly.min.js"></script>
+  <script>
+    const report = {"funnel": [{"label": "All Papers", "value": 81879}, {"label": "Accepted Papers", "value": 61930}, {"label": "Prefilter Candidates", "value": 1180}, {"label": "Triage Keep", "value": 538}], "raw_heatmap": {"years": [2023, 2024, 2025, 2026], "rows": [{"venue": "ACL", "values": [1976, 1915, 3086, 2296]}, {"venue": "CHI", "values": [879, 1057, 1249, 1702]}, {"venue": "EMNLP", "values": [2106, 2271, 3214, 0]}, {"venue": "ICLR.cc", "values": [1573, 2260, 3703, 5351]}, {"venue": "ICML.cc", "values": [1828, 2610, 3257, 6341]}, {"venue": "NeurIPS.cc", "values": [3218, 4035, 5286, 0]}, {"venue": "colmweb.org/COLM", "values": [0, 299, 418, 0]}]}, "prefilter_heatmap": {"years": [2023, 2024, 2025, 2026], "rows": [{"venue": "ACL", "values": [12, 18, 70, 73]}, {"venue": "CHI", "values": [22, 23, 45, 67]}, {"venue": "EMNLP", "values": [10, 24, 82, 0]}, {"venue": "ICLR.cc", "values": [16, 42, 77, 134]}, {"venue": "ICML.cc", "values": [12, 33, 64, 124]}, {"venue": "NeurIPS.cc", "values": [40, 52, 122, 0]}, {"venue": "colmweb.org/COLM", "values": [0, 12, 6, 0]}]}, "triage_keep_heatmap": {"years": [2023, 2024, 2025, 2026], "rows": [{"venue": "ACL", "values": [8, 9, 36, 51]}, {"venue": "CHI", "values": [14, 17, 34, 53]}, {"venue": "EMNLP", "values": [6, 9, 48, 0]}, {"venue": "ICLR.cc", "values": [6, 16, 22, 66]}, {"venue": "ICML.cc", "values": [1, 8, 14, 60]}, {"venue": "NeurIPS.cc", "values": [7, 12, 34, 0]}, {"venue": "colmweb.org/COLM", "values": [0, 4, 3, 0]}]}, "bucket_overlap": [{"label": "2", "value": 1129}, {"label": "3", "value": 49}, {"label": "4", "value": 2}], "tier_distribution": [{"label": "tier1_core", "value": 33}, {"label": "tier2_three_buckets", "value": 18}, {"label": "tier3_two_buckets_with_human_or_agent", "value": 1129}], "verdict_distribution": [{"label": "borderline", "value": 403}, {"label": "drop", "value": 642}, {"label": "keep", "value": 135}], "bucket_combos": [{"label": "agent + data_science", "value": 721}, {"label": "human + agent", "value": 190}, {"label": "agent + graph", "value": 131}, {"label": "human + data_science", "value": 82}, {"label": "human + agent + data_science", "value": 30}, {"label": "agent + data_science + graph", "value": 16}, {"label": "human + graph", "value": 5}, {"label": "human + agent + data_science + graph", "value": 2}, {"label": "human + data_science + graph", "value": 2}, {"label": "human + agent + graph", "value": 1}], "keyword_human": [{"label": "user study", "value": 108}, {"label": "human-in-the-loop", "value": 50}, {"label": "decision support", "value": 32}, {"label": "non-expert", "value": 31}, {"label": "analyst", "value": 30}, {"label": "interactive system", "value": 21}, {"label": "human-agent interaction", "value": 17}, {"label": "user-agent", "value": 16}, {"label": "human-agent collaboration", "value": 13}, {"label": "mixed-initiative", "value": 11}, {"label": "human ai interaction", "value": 2}, {"label": "user-in-the-loop", "value": 1}], "keyword_agent": [{"label": "agent", "value": 929}, {"label": "planning", "value": 322}, {"label": "multi-agent", "value": 213}, {"label": "llm agent", "value": 144}, {"label": "agentic", "value": 121}, {"label": "llm-based agent", "value": 70}, {"label": "llm-based agents", "value": 56}, {"label": "ai agent", "value": 56}, {"label": "autonomous agent", "value": 46}, {"label": "language agent", "value": 33}, {"label": "tool use", "value": 26}, {"label": "collaborative agent", "value": 8}, {"label": "interactive planning", "value": 1}], "keyword_data_science": [{"label": "decision-making", "value": 658}, {"label": "eda", "value": 98}, {"label": "data analysis", "value": 61}, {"label": "data science", "value": 26}, {"label": "complex workflow", "value": 11}, {"label": "sensemaking", "value": 11}, {"label": "analytical task", "value": 7}, {"label": "visual analytics", "value": 7}, {"label": "exploratory data analysis", "value": 6}, {"label": "data analytics", "value": 6}, {"label": "analysis workflow", "value": 3}], "keyword_graph": [{"label": "knowledge graph", "value": 91}, {"label": "graph neural network", "value": 52}, {"label": "gnn", "value": 28}, {"label": "node classification", "value": 4}, {"label": "graph exploration", "value": 4}, {"label": "graph algorithm", "value": 3}, {"label": "community detection", "value": 3}, {"label": "link prediction", "value": 2}, {"label": "graph analysis", "value": 2}, {"label": "network analysis", "value": 1}], "verdict_by_venue": {"venues": ["ACL", "CHI", "EMNLP", "ICLR.cc", "ICML.cc", "NeurIPS.cc", "colmweb.org/COLM"], "series": [{"label": "keep", "values": [17, 44, 14, 30, 16, 12, 2]}, {"label": "borderline", "values": [87, 74, 49, 80, 67, 41, 5]}, {"label": "drop", "values": [69, 39, 53, 159, 150, 161, 11]}]}, "keep_examples": [{"venue": "CHI", "year": 2025, "title": "Data Formulator 2: Iterative Creation of Data Visualizations, with AI Transforming Data Along the Way", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Directly targets iterative human-AI data visualization authoring where users specify intent and delegate data transformation to AI in exploratory analysis workflows."}, {"venue": "ICLR.cc", "year": 2026, "title": "AI-for-Science Low-code Platform with Bayesian Adversarial Multi-Agent Framework", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "This low-code AI-for-science platform explicitly coordinates multiple LLM agents with human-AI collaboration for scientific code generation and non-expert user workflows."}, {"venue": "ICML.cc", "year": 2025, "title": "Are Large Language Models Ready for Multi-Turn Tabular Data Analysis?", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Directly targets human-machine conversational tabular data analysis with multi-turn interaction and practical scenarios, aligning strongly with interactive data science workflows."}, {"venue": "CHI", "year": 2024, "title": "Marco: Supporting Business Document Workflows via Collection-Centric Information Foraging with Large Language Models", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "A mixed-initiative LLM workspace for real-world document collection sensemaking with interactive user-AI schema and information foraging support."}, {"venue": "CHI", "year": 2025, "title": "ChainBuddy: An AI-assisted Agent System for Generating LLM Pipelines", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "A user-facing AI workflow assistant for generating and evaluating LLM pipelines with attention to expertise, workload, and over-reliance."}, {"venue": "CHI", "year": 2025, "title": "Do It For Me vs. Do It With Me: Investigating User Perceptions of Different Paradigms of Automation in Copilots for Feature-Rich Software", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Directly compares automation paradigms and user control in LLM copilots across data analysis and design tasks, aligning with division of labor in interactive software workflows."}, {"venue": "CHI", "year": 2025, "title": "Generative AI in Knowledge Work: Design Implications for Data Navigation and Decision-Making", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Directly addresses GenAI support for knowledge work involving data navigation, synthesis, decision-making, user control, transparency, and workflow-adaptive collaboration."}, {"venue": "CHI", "year": 2026, "title": "Augmenting Clinical Decision-Making with an Interactive and Interpretable AI Copilot: A Real-World User Study with Clinicians in Nephrology and Obstetrics", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "An interactive AI copilot for clinicians using longitudinal EHR data with explicit verification, expertise differences, and collaborative decision-making in a real-world workflow."}, {"venue": "CHI", "year": 2026, "title": "Cocoa: Co-Planning and Co-Execution with AI Agents", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Directly addresses human-agent co-planning, co-execution, delegation, and interleaved execution for complex research tasks with notebook-inspired workflows."}, {"venue": "CHI", "year": 2026, "title": "DiagLink: A Dual-User Diagnostic Assistance System by Synergizing Experts with LLMs and Knowledge Graphs", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "A dual-user LLM and knowledge-graph diagnostic system with guided dialogue, physician oversight, role-adaptive interfaces, and collaborative reasoning in a real workflow."}, {"venue": "ICLR.cc", "year": 2026, "title": "Collaborative Gym: A Framework for Enabling and Evaluating Human-Agent Collaboration", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Directly matches the anchor with bidirectional human-agent collaboration, flexible coordination, real-user evaluation, and a tabular data analysis task."}, {"venue": "ACL", "year": 2025, "title": "Controllable and Reliable Knowledge-Intensive Task-Oriented Conversational Agents with Declarative Genie Worksheets", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Genie centrally addresses controllable task-oriented conversational agents for complex user interactions with policy and state-management mechanisms plus a user study, though not specifically data/graph focused."}, {"venue": "CHI", "year": 2025, "title": "Beyond Code Generation: LLM-supported Exploration of the Program Design Space", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "An LLM-supported IDE for iterative program design explicitly studies programmer-agent interaction, design decisions, and information handoff, adjacent to data-science coding workflows."}, {"venue": "CHI", "year": 2025, "title": "Interactive Debugging and Steering of Multi-Agent AI Systems", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Directly studies interfaces for developers to debug and steer multi-agent AI systems in complex agentic workflows, despite limited data or graph specificity."}, {"venue": "CHI", "year": 2026, "title": "ClearFairy: Capturing Creative Workflows through Decision Structuring, In-Situ Questioning, and Rationale Inference", "tier": "tier3_two_buckets_with_human_or_agent", "rationale": "Strong example of an AI assistant capturing professional workflow rationales through in-situ questioning, though in UI/UX design rather than data or graph analysis."}], "stats": {"all_papers": 81879, "accepted_papers": 61930, "prefilter_candidates": 1180, "triage_keep": 538, "triage_verdict_counts": {"keep": 135, "borderline": 403, "drop": 642}}};
+
+    function barChart(target, data, color) {
+      Plotly.newPlot(target, [{
+        type: 'bar',
+        x: data.map(d => d.label),
+        y: data.map(d => d.value),
+        marker: { color },
+        hovertemplate: '%{x}<br>%{y}<extra></extra>'
+      }], {
+        margin: { t: 10, r: 10, b: 60, l: 50 },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+      }, {responsive: true});
+    }
+
+    function funnelChart() {
+      Plotly.newPlot('funnel', [{
+        type: 'funnel',
+        y: report.funnel.map(d => d.label),
+        x: report.funnel.map(d => d.value),
+        textinfo: 'value+percent initial',
+        marker: {
+          color: ['#0f766e', '#1d4ed8', '#c2410c', '#7c3aed']
+        }
+      }], {
+        margin: { t: 10, r: 20, b: 20, l: 120 },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+      }, {responsive: true});
+    }
+
+    function singleHeatmap(target, heatmap, title, colorscale) {
+      Plotly.newPlot(target, [{
+        z: heatmap.rows.map(row => row.values),
+        x: heatmap.years,
+        y: heatmap.rows.map(row => row.venue),
+        type: 'heatmap',
+        colorscale,
+        colorbar: {
+          orientation: 'h',
+          x: 0.5,
+          y: -0.22,
+          xanchor: 'center',
+          len: 0.7,
+          thickness: 10
+        },
+        hovertemplate: '%{y} · %{x}<br>%{z} papers<extra></extra>'
+      }], {
+        title: {text: title, x: 0.5, xanchor: 'center'},
+        margin: { t: 60, r: 20, b: 110, l: 90 },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        xaxis: {title: 'Year'},
+        yaxis: {title: 'Venue'},
+      }, {responsive: true});
+    }
+
+    function verdictByVenue() {
+      Plotly.newPlot('verdictByVenue', report.verdict_by_venue.series.map((s, idx) => ({
+        type: 'bar',
+        name: s.label,
+        x: report.verdict_by_venue.venues,
+        y: s.values,
+        marker: {color: ['#0f766e', '#c2410c', '#6b7280'][idx]},
+      })), {
+        barmode: 'stack',
+        margin: { t: 10, r: 10, b: 70, l: 50 },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+      }, {responsive: true});
+    }
+
+    function keywordCharts() {
+      const traces = [
+        ['Human', report.keyword_human, '#ef4444', 'x', 'y'],
+        ['Agent', report.keyword_agent, '#1d4ed8', 'x2', 'y2'],
+        ['Data Science', report.keyword_data_science, '#c2410c', 'x3', 'y3'],
+        ['Graph', report.keyword_graph, '#0f766e', 'x4', 'y4'],
+      ].map(([label, data, color, xaxis, yaxis]) => ({
+        type: 'bar',
+        orientation: 'h',
+        name: label,
+        x: data.map(d => d.value).reverse(),
+        y: data.map(d => d.label).reverse(),
+        marker: { color },
+        xaxis,
+        yaxis,
+        hovertemplate: '%{y}<br>%{x}<extra></extra>'
+      }));
+      Plotly.newPlot('keywordCharts', traces, {
+        grid: {rows: 2, columns: 2, pattern: 'independent'},
+        margin: { t: 80, r: 30, b: 20, l: 240 },
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        yaxis: {automargin: true},
+        yaxis2: {automargin: true},
+        yaxis3: {automargin: true},
+        yaxis4: {automargin: true},
+        annotations: [
+          {text: 'Human', x: 0.20, y: 1.05, xref: 'paper', yref: 'paper', showarrow: false},
+          {text: 'Agent', x: 0.80, y: 1.05, xref: 'paper', yref: 'paper', showarrow: false},
+          {text: 'Data Science', x: 0.20, y: 0.48, xref: 'paper', yref: 'paper', showarrow: false},
+          {text: 'Graph', x: 0.80, y: 0.48, xref: 'paper', yref: 'paper', showarrow: false}
+        ]
+      }, {responsive: true});
+    }
+
+    funnelChart();
+    barChart('verdictDistribution', report.verdict_distribution, '#7c3aed');
+    singleHeatmap('rawHeatmap', report.raw_heatmap, 'Accepted Raw', 'YlGnBu');
+    singleHeatmap('prefilterHeatmap', report.prefilter_heatmap, 'Prefilter Candidates', 'Oranges');
+    singleHeatmap('triageHeatmap', report.triage_keep_heatmap, 'Triage Retained', 'Purples');
+    barChart('bucketOverlap', report.bucket_overlap, '#0f766e');
+    barChart('tierDistribution', report.tier_distribution, '#1d4ed8');
+    barChart('bucketCombos', report.bucket_combos, '#c2410c');
+    verdictByVenue();
+    keywordCharts();
+  </script><!-- hub:start --><footer class="hub-footer"><a href="../index.html">Project Hub</a> &middot; Copyright <a href="https://jjydxfs.github.io/">@JJYXDSF</a>. Built in collaboration with Codex.<br>Last updated: <time datetime="2026-10-08T16:12:23+11:00">2026-10-08 16:12 AEDT</time> (website)</footer><!-- hub:end --></body>
+</html>

@@ -1,0 +1,213 @@
+{
+  "source": "data/main/corpus/merged/papers_master.json",
+  "source_sha256": "d45a8b9ea79094d53c75763b6f548fbbb9508ae61561929039dd1c6fc0cb0b56",
+  "scope_notes": "Workflow notes document NeurIPS/EMNLP 2026 skipped; promoted advisor run covers COLM 2024-25 and CHI 2023-26.",
+  "total_records": 81879,
+  "venues": [
+    "ICML",
+    "ACL",
+    "ICLR",
+    "EMNLP",
+    "NeurIPS",
+    "COLM",
+    "CHI"
+  ],
+  "cells": [
+    {
+      "year": 2023,
+      "venue": "ICML",
+      "count": 1828,
+      "status": "Scanned",
+      "note": "1,828 records"
+    },
+    {
+      "year": 2023,
+      "venue": "ACL",
+      "count": 1976,
+      "status": "Scanned",
+      "note": "1,976 records"
+    },
+    {
+      "year": 2023,
+      "venue": "ICLR",
+      "count": 3810,
+      "status": "Scanned",
+      "note": "3,810 records"
+    },
+    {
+      "year": 2023,
+      "venue": "EMNLP",
+      "count": 2106,
+      "status": "Scanned",
+      "note": "2,106 records"
+    },
+    {
+      "year": 2023,
+      "venue": "NeurIPS",
+      "count": 3394,
+      "status": "Scanned",
+      "note": "3,394 records"
+    },
+    {
+      "year": 2023,
+      "venue": "COLM",
+      "count": 0,
+      "status": "Not scanned",
+      "note": "Outside selected scope"
+    },
+    {
+      "year": 2023,
+      "venue": "CHI",
+      "count": 879,
+      "status": "Scanned",
+      "note": "879 records"
+    },
+    {
+      "year": 2024,
+      "venue": "ICML",
+      "count": 2610,
+      "status": "Scanned",
+      "note": "2,610 records"
+    },
+    {
+      "year": 2024,
+      "venue": "ACL",
+      "count": 1915,
+      "status": "Scanned",
+      "note": "1,915 records"
+    },
+    {
+      "year": 2024,
+      "venue": "ICLR",
+      "count": 5691,
+      "status": "Scanned",
+      "note": "5,691 records"
+    },
+    {
+      "year": 2024,
+      "venue": "EMNLP",
+      "count": 2271,
+      "status": "Scanned",
+      "note": "2,271 records"
+    },
+    {
+      "year": 2024,
+      "venue": "NeurIPS",
+      "count": 4236,
+      "status": "Scanned",
+      "note": "4,236 records"
+    },
+    {
+      "year": 2024,
+      "venue": "COLM",
+      "count": 299,
+      "status": "Scanned",
+      "note": "299 records"
+    },
+    {
+      "year": 2024,
+      "venue": "CHI",
+      "count": 1057,
+      "status": "Scanned",
+      "note": "1,057 records"
+    },
+    {
+      "year": 2025,
+      "venue": "ICML",
+      "count": 3419,
+      "status": "Scanned",
+      "note": "3,419 records"
+    },
+    {
+      "year": 2025,
+      "venue": "ACL",
+      "count": 3086,
+      "status": "Scanned",
+      "note": "3,086 records"
+    },
+    {
+      "year": 2025,
+      "venue": "ICLR",
+      "count": 8613,
+      "status": "Scanned",
+      "note": "8,613 records"
+    },
+    {
+      "year": 2025,
+      "venue": "EMNLP",
+      "count": 3214,
+      "status": "Scanned",
+      "note": "3,214 records"
+    },
+    {
+      "year": 2025,
+      "venue": "NeurIPS",
+      "count": 5540,
+      "status": "Scanned",
+      "note": "5,540 records"
+    },
+    {
+      "year": 2025,
+      "venue": "COLM",
+      "count": 418,
+      "status": "Scanned",
+      "note": "418 records"
+    },
+    {
+      "year": 2025,
+      "venue": "CHI",
+      "count": 1249,
+      "status": "Scanned",
+      "note": "1,249 records"
+    },
+    {
+      "year": 2026,
+      "venue": "ICML",
+      "count": 6555,
+      "status": "Scanned",
+      "note": "6,555 records"
+    },
+    {
+      "year": 2026,
+      "venue": "ACL",
+      "count": 2296,
+      "status": "Partial",
+      "note": "2,296 records; Findings missing"
+    },
+    {
+      "year": 2026,
+      "venue": "ICLR",
+      "count": 13715,
+      "status": "Scanned",
+      "note": "13,715 records"
+    },
+    {
+      "year": 2026,
+      "venue": "EMNLP",
+      "count": 0,
+      "status": "Not scanned",
+      "note": "Unavailable at collection"
+    },
+    {
+      "year": 2026,
+      "venue": "NeurIPS",
+      "count": 0,
+      "status": "Not scanned",
+      "note": "Unavailable at collection"
+    },
+    {
+      "year": 2026,
+      "venue": "COLM",
+      "count": 0,
+      "status": "Not scanned",
+      "note": "Outside selected scope"
+    },
+    {
+      "year": 2026,
+      "venue": "CHI",
+      "count": 1702,
+      "status": "Scanned",
+      "note": "1,702 records"
+    }
+  ]
+}

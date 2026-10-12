@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Error Analysis Synthesis Pipeline</title>
+  <style>
+    :root {
+      --bg: #f7f4ed;
+      --panel: #fffdf8;
+      --ink: #1e1e1e;
+      --muted: #67615a;
+      --line: #d9d0c2;
+      --data: #0f766e;
+      --llm: #2563eb;
+      --human: #b45309;
+      --analysis: #7c3aed;
+      --audit: #be123c;
+      --soft: #f1ece3;
+      --shadow: 0 10px 24px rgba(40, 30, 20, 0.07);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fbf8f2 0%, #eee5d8 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .wrap {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 28px 22px 48px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h2, h3 { letter-spacing: 0; }
+
+    .sub {
+      max-width: 980px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      max-width: 520px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--data);
+    }
+
+    .dot.llm { background: var(--llm); }
+    .dot.human { background: var(--human); }
+    .dot.analysis { background: var(--analysis); }
+    .dot.audit { background: var(--audit); }
+
+    .ribbon {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: var(--shadow);
+      padding: 14px 16px;
+      line-height: 1.48;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .note strong {
+      color: var(--ink);
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(145px, 1fr));
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 16px;
+    }
+
+    .stage {
+      position: relative;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .stage::after {
+      content: "";
+      position: absolute;
+      top: 42px;
+      right: -13px;
+      width: 13px;
+      border-top: 2px solid #b9ad9d;
+    }
+
+    .stage:last-child::after { display: none; }
+
+    .kicker {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .stage h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .items {
+      display: grid;
+      gap: 8px;
+    }
+
+    .item {
+      min-width: 0;
+      border-left: 4px solid var(--data);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 8px 9px;
+      font-size: 12px;
+      line-height: 1.38;
+      overflow-wrap: anywhere;
+    }
+
+    .item.llm { border-left-color: var(--llm); }
+    .item.human { border-left-color: var(--human); }
+    .item.analysis { border-left-color: var(--analysis); }
+    .item.audit { border-left-color: var(--audit); }
+
+    .item strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 2px;
+      font-size: 12px;
+    }
+
+    code {
+      display: inline-block;
+      max-width: 100%;
+      color: #33302c;
+      background: #eee7dc;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: 12px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .lanes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .lane {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .lane h2 {
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .flow {
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 10px;
+      border: 1px solid #e3d9cc;
+      border-radius: 8px;
+      background: #fffaf3;
+    }
+
+    .step .who {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .step .what {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .outputs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .output {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .output h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .output p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .metric {
+      display: inline-flex;
+      margin: 4px 4px 0 0;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: #faf7f0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 1250px) {
+      .pipeline { grid-template-columns: 1fr; }
+      .stage::after { display: none; }
+    }
+
+    @media (max-width: 900px) {
+      header, .ribbon, .lanes, .outputs { grid-template-columns: 1fr; }
+      .legend { justify-content: flex-start; }
+    }
+
+    @media (max-width: 620px) {
+      .step { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+<link rel="stylesheet" href="../assets/hub.css">
+</head>
+<body><!-- hub:start --><div class="hub-tools"><a href="../index.html">&larr; Project Hub</a><details><summary>All reports</summary><nav aria-label="Project reports"><a href="stage5_research_space_3d.html">3D Research Space</a><a href="audit_browser_all_merged.html">Evidence Audit</a><a href="cluster_visual_space.html">Challenge Landscape</a><a href="visualization_report.html">Corpus Dashboard</a><a href="triage_browser.html">Triage Browser</a><a href="intersection_browser.html">Bucket Intersections</a><a href="literature_review_pipeline.html">Literature Review Pipeline</a><a href="error_analysis_synthesis_pipeline.html" aria-current="page">Error Analysis Pipeline</a></nav></details></div><!-- hub:end -->
+  
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Error Analysis Synthesis Pipeline</h1>
+        <p class="sub">A post-Stage-5 workflow for turning selected papers into auditable failure evidence, canonical challenge clusters, temporal/community dynamics, and research-gap synthesis.</p>
+      </div>
+      <div class="legend">
+        <span class="tag"><span class="dot"></span>Cached data</span>
+        <span class="tag"><span class="dot llm"></span>LLM extraction/synthesis</span>
+        <span class="tag"><span class="dot analysis"></span>Analysis layer</span>
+        <span class="tag"><span class="dot audit"></span>Audit interface</span>
+        <span class="tag"><span class="dot human"></span>Human validation</span>
+      </div>
+    </header>
+
+    <section class="ribbon" aria-label="Context and snapshot">
+      <div class="note">
+        <strong>Position in the larger workflow:</strong> this pipeline starts after the literature-review pipeline has already produced a frozen Stage 5 seed set. It does not expand the corpus or decide which papers belong in scope. Its job is to mine the selected papers for explicit evidence about failures, limitations, diagnostic breakdowns, and unresolved gaps.
+      </div>
+      <div class="note">
+        <strong>Current snapshot:</strong>
+        <span class="metric">81 Stage 5 papers</span>
+        <span class="metric">639 merged evidence rows</span>
+        <span class="metric">20 challenge clusters</span>
+        <span class="metric">639 embedding points</span>
+        <span class="metric">4029 KNN edges</span>
+      </div>
+    </section>
+
+    <section class="pipeline" aria-label="Error analysis synthesis flow">
+      <article class="stage">
+        <div class="kicker">Input</div>
+        <h2>Frozen Stage 5 Set</h2>
+        <div class="items">
+          <div class="item"><strong>Seed papers</strong><code>data/stage5/stage5_paper_index.json</code></div>
+          <div class="item"><strong>Cached full text</strong><code>data/stage5/extracted_text/</code></div>
+          <div class="item"><strong>Research boundary</strong>Manual labels and paper cards define the scope.</div>
+          <div class="item human"><strong>Human checkpoint</strong>Stage 5 membership is already frozen before this analysis begins.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="kicker">Extraction</div>
+        <h2>Dual Evidence Mining</h2>
+        <div class="items">
+          <div class="item llm"><strong>Candidate chunks</strong>Recall-heavy extraction from sections likely to contain limitations, errors, ablations, and discussion gaps.</div>
+          <div class="item llm"><strong>Full text pass</strong>Paper-level extraction for high-level framing and less obvious failure evidence.</div>
+          <div class="item"><strong>Structured fields</strong>Quote, paraphrase, mechanism, implication, mitigation, page, section hint, relevance score.</div>
+          <div class="item audit"><strong>Smoke first</strong>10-paper smoke set checks extraction quality before the full run.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="kicker">Merge</div>
+        <h2>Evidence Deduplication</h2>
+        <div class="items">
+          <div class="item"><strong>Raw overlap</strong>Merge same-context evidence across extraction strategies.</div>
+          <div class="item llm"><strong>Semantic merge</strong>LLM checks ambiguous candidate pairs with conservative merge rules.</div>
+          <div class="item"><strong>Stable IDs</strong>Each merged row receives <code>all_merge_xxxx</code> for cross-view traceability.</div>
+          <div class="item audit"><strong>Audit browser</strong><code>audit_browser_all_merged.html</code> exposes every merged evidence row and source item.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="kicker">Taxonomy</div>
+        <h2>Challenge Clustering</h2>
+        <div class="items">
+          <div class="item llm"><strong>Provisional clusters</strong>Batch-level LLM clustering over evidence mechanisms.</div>
+          <div class="item llm"><strong>Canonical clusters</strong>Merge provisional clusters into stable <code>Cxx</code> challenge categories.</div>
+          <div class="item"><strong>Coverage repair</strong>Assign omitted evidence and normalize legacy repair IDs back to the <code>Cxx</code> namespace.</div>
+          <div class="item audit"><strong>Cluster browser</strong><code>clusters_v1/cluster_browser.html</code> supports challenge-level inspection.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="kicker">Dynamics</div>
+        <h2>Temporal and Community Analysis</h2>
+        <div class="items">
+          <div class="item analysis"><strong>Venue timeline</strong>Use event dates where available, year-only fallback otherwise.</div>
+          <div class="item analysis"><strong>Community flow</strong>Track HCI/CHI, ML/data-science benchmarks, human-agent collaboration, and graph benchmarks.</div>
+          <div class="item analysis"><strong>Year dynamics</strong>Find persistent, newly visible, increasing, and fading challenges.</div>
+          <div class="item audit"><strong>Caution</strong>Counts are curated evidence counts, not field-wide bibliometrics.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="kicker">Visual Space</div>
+        <h2>Interactive Evidence Map</h2>
+        <div class="items">
+          <div class="item analysis"><strong>Sankey</strong>Year/Event to community to challenge flow, with presentation and detail modes.</div>
+          <div class="item analysis"><strong>Semantic map</strong>Evidence embeddings projected with UMAP; KNN links show high-dimensional semantic neighbors.</div>
+          <div class="item analysis"><strong>Heatmap</strong>Challenge-by-year evidence dynamics and ranking panels.</div>
+          <div class="item audit"><strong>Evidence chips</strong>Click IDs to inspect quote, paraphrase, paper, and challenge in context.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="kicker">Synthesis</div>
+        <h2>Research Gap Report</h2>
+        <div class="items">
+          <div class="item llm"><strong>Challenge evolution</strong>Generate bilingual synthesis over clusters, dynamics, and representative evidence.</div>
+          <div class="item analysis"><strong>Candidate gaps</strong>Form claims about persistent, emerging, migrating, and reframed failure mechanisms.</div>
+          <div class="item audit"><strong>Traceability</strong>Every high-level claim keeps challenge IDs and evidence IDs.</div>
+          <div class="item human"><strong>Human validation</strong>User reads evidence, cross-checks overclaims, and builds an independent landscape understanding.</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="lanes">
+      <article class="lane">
+        <h2>Human-Audit Thread</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="who">Before extraction</div>
+            <div class="what">Confirm that the Stage 5 set is the right reading boundary. This analysis assumes the paper set is already worth deep reading.</div>
+          </div>
+          <div class="step">
+            <div class="who">After smoke</div>
+            <div class="what">Inspect whether extracted evidence captures real failure analysis rather than generic limitations or unsupported summaries.</div>
+          </div>
+          <div class="step">
+            <div class="who">During review</div>
+            <div class="what">Read all merged evidence rows from <code>audit_browser_all_merged.html</code> to build an independent human landscape.</div>
+          </div>
+          <div class="step">
+            <div class="who">After synthesis</div>
+            <div class="what">Cross-validate report claims against evidence IDs, cluster definitions, and original paper context before using them in a proposal.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lane">
+        <h2>Traceability Chain</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="who">Evidence ID</div>
+            <div class="what"><code>all_merge_xxxx</code> is the stable bridge between audit browsers, visual-space evidence cards, cluster assignments, and synthesis citations.</div>
+          </div>
+          <div class="step">
+            <div class="who">Challenge ID</div>
+            <div class="what"><code>Cxx</code> names canonical challenge clusters, such as evaluation misestimation, state drift, verification breakdown, or strategy failure.</div>
+          </div>
+          <div class="step">
+            <div class="who">Claim support</div>
+            <div class="what">High-level research-gap claims cite both <code>Cxx</code> clusters and <code>all_merge_xxxx</code> evidence rows so they can be audited.</div>
+          </div>
+          <div class="step">
+            <div class="who">Raw source</div>
+            <div class="what">Each evidence row preserves quotes, paraphrases, page/section hints, raw context, and source extraction items.</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="outputs">
+      <article class="output">
+        <h3>Evidence Audit</h3>
+        <p><code>data/analysis/error_patterns_20260723/audit_browser_all_merged.html</code> is the best starting point for reading all merged evidence.</p>
+      </article>
+      <article class="output">
+        <h3>Cluster Audit</h3>
+        <p><code>data/analysis/error_patterns_20260723/clusters_v1/cluster_browser.html</code> groups evidence by canonical challenge clusters.</p>
+      </article>
+      <article class="output">
+        <h3>Visual Report</h3>
+        <p><code>data/analysis/error_patterns_20260723/clusters_v1/visual_space/cluster_visual_space.html</code> combines Sankey, semantic map, yearly dynamics, and bilingual synthesis.</p>
+      </article>
+      <article class="output">
+        <h3>Control Notes</h3>
+        <p><code>docs/stage5/error_pattern_post_analysis.md</code> records reproduction commands, audit rules, and interpretation cautions.</p>
+      </article>
+    </section>
+  </div><!-- hub:start --><footer class="hub-footer"><a href="../index.html">Project Hub</a> &middot; Copyright <a href="https://jjydxfs.github.io/">@JJYXDSF</a>. Built in collaboration with Codex.<br>Last updated: <time datetime="2026-10-08T16:12:23+11:00">2026-10-08 16:12 AEDT</time> (website)</footer><!-- hub:end --></body>
+</html>

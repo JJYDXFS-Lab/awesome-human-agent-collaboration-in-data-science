@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Literature Review Pipeline</title>
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --ink: #1d1c1a;
+      --muted: #67615a;
+      --line: #d7cfc3;
+      --panel: #fffdfa;
+      --data: #0f766e;
+      --human: #b45309;
+      --llm: #1d4ed8;
+      --side: #7c3aed;
+      --risk: #b91c1c;
+      --shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fbf8f2 0%, #eee6da 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .wrap {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 28px 22px 48px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    .sub {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--data);
+    }
+    .dot.human { background: var(--human); }
+    .dot.llm { background: var(--llm); }
+    .dot.side { background: var(--side); }
+    .dot.risk { background: var(--risk); }
+    .map {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(180px, 1fr));
+      gap: 14px;
+      align-items: stretch;
+    }
+    .stage {
+      position: relative;
+      min-width: 0;
+      min-height: 250px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .stage::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -15px;
+      width: 15px;
+      border-top: 2px solid #bdb2a5;
+    }
+    .stage:last-child::after { display: none; }
+    .stage-title {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    .stage-kicker {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .items {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .item {
+      min-width: 0;
+      border-left: 4px solid var(--data);
+      border-radius: 8px;
+      background: #f8f5ef;
+      padding: 9px 10px;
+      font-size: 13px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+    .item.human { border-left-color: var(--human); }
+    .item.llm { border-left-color: var(--llm); }
+    .item.side { border-left-color: var(--side); }
+    .item.risk { border-left-color: var(--risk); }
+    .item strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+    code {
+      display: inline-block;
+      max-width: 100%;
+      color: #33302c;
+      background: #eee7dc;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: 12px;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+    .lanes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .lane {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,253,250,0.86);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .lane h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    .flow {
+      display: grid;
+      gap: 10px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 135px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 10px;
+      border: 1px solid #e3d9cc;
+      border-radius: 8px;
+      background: #fffaf3;
+    }
+    .step .who {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .step .what {
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .outputs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .output {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .output h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    .output p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    @media (max-width: 1100px) {
+      .map { grid-template-columns: 1fr; }
+      .stage::after { display: none; }
+      header, .lanes, .outputs { grid-template-columns: 1fr; }
+      .legend { justify-content: flex-start; }
+    }
+    @media (max-width: 620px) {
+      .step { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+<link rel="stylesheet" href="../assets/hub.css">
+</head>
+<body><!-- hub:start --><div class="hub-tools"><a href="../index.html">&larr; Project Hub</a><details><summary>All reports</summary><nav aria-label="Project reports"><a href="stage5_research_space_3d.html">3D Research Space</a><a href="audit_browser_all_merged.html">Evidence Audit</a><a href="cluster_visual_space.html">Challenge Landscape</a><a href="visualization_report.html">Corpus Dashboard</a><a href="triage_browser.html">Triage Browser</a><a href="intersection_browser.html">Bucket Intersections</a><a href="literature_review_pipeline.html" aria-current="page">Literature Review Pipeline</a><a href="error_analysis_synthesis_pipeline.html">Error Analysis Pipeline</a></nav></details></div><!-- hub:end -->
+  
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Literature Review Pipeline</h1>
+        <p class="sub">A reusable workflow for turning public conference metadata into a scoped seed set, with explicit human checkpoints and optional side-topic rescue scans.</p>
+      </div>
+      <div class="legend">
+        <span class="tag"><span class="dot"></span>Data / script</span>
+        <span class="tag"><span class="dot human"></span>Human input</span>
+        <span class="tag"><span class="dot llm"></span>LLM analysis</span>
+        <span class="tag"><span class="dot side"></span>Optional side path</span>
+        <span class="tag"><span class="dot risk"></span>Known pitfall</span>
+      </div>
+    </header>
+
+    <section class="map" aria-label="Main pipeline">
+      <article class="stage">
+        <div class="stage-kicker">Stage 1</div>
+        <h2 class="stage-title">Collect Corpus</h2>
+        <div class="items">
+          <div class="item"><strong>Fetch metadata</strong><code>paper_scanner.py fetch</code> pulls OpenReview and ACL Anthology records.</div>
+          <div class="item"><strong>Persist raw data</strong>JSON and XLSX are saved before any filtering.</div>
+          <div class="item human"><strong>Human decision</strong>Choose venues, years, accepted/rejected status, and whether Findings are included.</div>
+          <div class="item risk"><strong>Pitfall</strong>OpenReview tab names vary; ACL/EMNLP are not OpenReview-first.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="stage-kicker">Stage 2</div>
+        <h2 class="stage-title">Local Prefilter</h2>
+        <div class="items">
+          <div class="item"><strong>Bucket tagging</strong>Match <code>human</code>, <code>agent</code>, <code>data_science</code>, and <code>graph</code>.</div>
+          <div class="item"><strong>Tier assignment</strong>Export high-recall candidates by overlap rules.</div>
+          <div class="item human"><strong>Human decision</strong>Tune keywords and decide whether recall or precision matters more.</div>
+          <div class="item risk"><strong>Pitfall</strong>Broad terms like <code>agent</code>, <code>eda</code>, and <code>decision-making</code> create useful noise.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="stage-kicker">Stage 3</div>
+        <h2 class="stage-title">LLM Triage</h2>
+        <div class="items">
+          <div class="item llm"><strong>Structured triage</strong><code>paper_scanner.py triage</code> scores uncertain candidates using the anchor file.</div>
+          <div class="item"><strong>Auto keep</strong>Strong prefilter tiers are retained without LLM calls.</div>
+          <div class="item human"><strong>Human decision</strong>Maintain <code>problem_space_anchor.md</code> and decide what counts as keep/borderline/drop.</div>
+          <div class="item risk"><strong>Pitfall</strong>LLM triage is not final truth; it mirrors the anchor quality.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="stage-kicker">Stage 4</div>
+        <h2 class="stage-title">Manual Screening</h2>
+        <div class="items">
+          <div class="item"><strong>Read efficiently</strong><code>triage_browser.html</code> supports filtering, search, and abstract review.</div>
+          <div class="item"><strong>Explore clusters</strong><code>intersection_browser.html</code> shows bucket combinations and interpretations.</div>
+          <div class="item human"><strong>Human decision</strong>Keep notes for core, benchmark, method, background, contrast, and drop.</div>
+          <div class="item risk"><strong>Pitfall</strong>XLSX is useful for checking, but painful for long abstract reading.</div>
+        </div>
+      </article>
+
+      <article class="stage">
+        <div class="stage-kicker">Stage 5</div>
+        <h2 class="stage-title">Freeze Seed Set</h2>
+        <div class="items">
+          <div class="item"><strong>Finalize layers</strong>Separate core papers from benchmark/reference/method/background papers.</div>
+          <div class="item"><strong>Reverse analysis</strong>Use manual notes to infer the real relevance boundary.</div>
+          <div class="item human"><strong>Human decision</strong>Decide whether the current venue set is enough before expanding scope.</div>
+          <div class="item risk"><strong>Pitfall</strong>Expanding venues too early can restart the entire reading burden.</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="lanes">
+      <article class="lane">
+        <h2>Human Intervention Points</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="who">Before fetch</div>
+            <div class="what">Set venue/year/status scope. Example: ML/NLP top venues first; KDD/WSDM/CIKM only if citation chains demand it.</div>
+          </div>
+          <div class="step">
+            <div class="who">Before prefilter</div>
+            <div class="what">Edit keyword buckets or pass CLI overrides. The first pass intentionally favors recall.</div>
+          </div>
+          <div class="step">
+            <div class="who">Before triage</div>
+            <div class="what">Update <code>problem_space_anchor.md</code> with positive examples, boundary notes, and known false positives.</div>
+          </div>
+          <div class="step">
+            <div class="who">During screening</div>
+            <div class="what">Record short notes. Useful labels include core, benchmark, method, background, contrast, and drop.</div>
+          </div>
+          <div class="step">
+            <div class="who">After screening</div>
+            <div class="what">Audit what was kept and dropped to refine the problem boundary and justify the review scope.</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="lane">
+        <h2>Optional Side-Topic Rescue</h2>
+        <div class="flow">
+          <div class="step">
+            <div class="who">Trigger</div>
+            <div class="what">Use when a narrow line is likely missed by the main funnel, such as fully autonomous graph-problem benchmarks.</div>
+          </div>
+          <div class="step">
+            <div class="who">Seed signal</div>
+            <div class="what">Provide seed papers or notes. Preprints can guide the search even when they are absent from the accepted corpus.</div>
+          </div>
+          <div class="step">
+            <div class="who">Local scan</div>
+            <div class="what"><code>seed_rescue_scan.py</code> or a focused preset scans the cached corpus and writes a separate output directory.</div>
+          </div>
+          <div class="step">
+            <div class="who">LLM pass</div>
+            <div class="what">Optional. Use it when the rescue pool is still noisy, as with graph problem benchmark summaries and relevance scores.</div>
+          </div>
+          <div class="step">
+            <div class="who">Boundary</div>
+            <div class="what">Side-topic results do not merge into the main human-agent review unless explicitly promoted.</div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="outputs">
+      <article class="output">
+        <h3>Main Artifacts</h3>
+        <p><code>papers_master.json</code>, <code>prefilter_candidates.json</code>, <code>triage_full.json</code>, and <code>triage_keep.json</code> form the reproducible main path.</p>
+      </article>
+      <article class="output">
+        <h3>Reading Interfaces</h3>
+        <p><code>data/main/triage_run1/triage_browser.html</code>, <code>data/main/triage_run1/intersection_browser.html</code>, and <code>data/reports/visualization_report.html</code> are for human screening and sanity checks.</p>
+      </article>
+      <article class="output">
+        <h3>Side Outputs</h3>
+        <p><code>data/side_topics/graph_problem_benchmark/</code> contains the graph-problem benchmark rescue pack, including LLM summaries and relevance scores.</p>
+      </article>
+    </section>
+  </div><!-- hub:start --><footer class="hub-footer"><a href="../index.html">Project Hub</a> &middot; Copyright <a href="https://jjydxfs.github.io/">@JJYXDSF</a>. Built in collaboration with Codex.<br>Last updated: <time datetime="2026-10-08T16:12:23+11:00">2026-10-08 16:12 AEDT</time> (website)</footer><!-- hub:end --></body>
+</html>
