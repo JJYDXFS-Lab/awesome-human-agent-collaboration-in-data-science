@@ -1,5 +1,7 @@
 # Awesome Human-Agent Collaboration in Data Science
 
+![A researcher and an AI assistant jointly examining a data table, scatterplot, and graph.](assets/readme-banner.png)
+
 **An experimental, living human-in-the-loop survey.**
 
 This project explores how humans and AI agents collaborate on data science

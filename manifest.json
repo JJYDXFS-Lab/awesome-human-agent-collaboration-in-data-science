@@ -13,9 +13,10 @@
   "sha256": {
     ".gitignore": "2dd8caaf8c754d7156cb7ba962af086a6b1e9f9a1bdbd1e93a1ed4b00d9880cb",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "README.md": "3f74c2aa3336c9609c53d44ff2ed7b23143843f7d1c59c03bdab25b5103ca30f",
+    "README.md": "d3392977345f0803a382bd9e1269241bc5797d6b847097b4a47e2d8a594a1ba8",
     "assets/hub.css": "cb05763e59a9be3a61616f868be0d86e4766970d622f98c319256b9b5b6543a7",
     "assets/plotly.min.js": "48152d086ecfa314b82937e815e17ad317d73016535a94a85cec3c1eaeae660f",
+    "assets/readme-banner.png": "3d4f7223ac8493c2441df32ad8f711000f04483d920e49057f5b9d8cc6be2f0d",
     "assets/three/build/three.core.js": "0ace6b393629439c4fc5dbbf1f1f0f7946c6373457b13b6a16b6b5dc8764fcc9",
     "assets/three/build/three.module.js": "ce6be0cb5ead0027e1f6094dd82ad43bba0886c03324a3b21fd9a33ac93fc2b4",
     "assets/three/examples/jsm/controls/OrbitControls.js": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c",
