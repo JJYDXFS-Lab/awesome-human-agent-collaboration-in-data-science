@@ -5,6 +5,12 @@
 .hub-header>a { font-weight:750; color:var(--hub-ink); text-decoration:none; }
 .hub-header nav,.hub-shortcuts { display:flex; flex-wrap:wrap; gap:12px 24px; }
 .hub-header nav a { color:var(--hub-muted); font-size:14px; text-decoration:none; }
+.hub-header nav { align-items:center; }
+.hub-header .hub-repo-link { position:relative; display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; flex:0 0 40px; border-radius:6px; }
+.hub-repo-link:hover,.hub-repo-link:focus-visible { background:#eaf5f1; }
+.hub-repo-link img { display:block; width:22px; height:22px; }
+.hub-repo-tooltip { position:absolute; top:calc(100% + 8px); right:0; z-index:20; padding:5px 9px; border-radius:4px; background:var(--hub-ink); color:#fff; font-size:12px; white-space:nowrap; opacity:0; visibility:hidden; pointer-events:none; }
+.hub-repo-link:hover .hub-repo-tooltip,.hub-repo-link:focus-visible .hub-repo-tooltip { opacity:1; visibility:visible; }
 .hub-main { max-width:1208px; margin:auto; padding:0 24px; }
 .hub-intro { padding:38px 0 30px; border-bottom:1px solid var(--hub-line); }
 .hub-eyebrow,.hub-kind { color:var(--hub-accent); font-size:12px; font-weight:700; }
