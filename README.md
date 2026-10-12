@@ -117,7 +117,7 @@ or synchronize personal browser notes.
 
 ## Credits
 
-Maintained by [@JJYXDSF](https://jjydxfs.github.io/), developed in collaboration
+Maintained by [@JJYDXFS](https://jjydxfs.github.io/), developed in collaboration
 with Codex. Original papers remain the work of their respective authors;
 please cite those papers for their findings. Bundled third-party libraries
 retain their own license notices.
