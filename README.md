@@ -1,130 +1,43 @@
 # Awesome Human-Agent Collaboration in Data Science
 
-![A researcher and an AI assistant jointly examining a data table, scatterplot, and graph.](assets/readme-banner.png)
+![A researcher and an AI assistant exploring data together.](assets/readme-banner.png)
 
-**An experimental, living human-in-the-loop survey.**
+**An experimental, living human-in-the-loop survey** of human-agent
+collaboration in data science and complex analytical workflows.
 
-This project explores how humans and AI agents collaborate on data science
-and complex analytical workflows: how they divide work, where collaboration
-breaks down, and which research questions remain open.
+We connect papers, benchmarks, research landscapes, and traceable failure
+evidence across ML, NLP, and HCI. The collection evolves through LLM-assisted
+screening and synthesis, guided by human selection and interpretation.
 
-More than a paper list, it brings together an interactive research landscape,
-traceable failure evidence, and evolving challenge synthesis. It is a working
-research resource, not a completed or peer-reviewed systematic review.
+## Explore
 
-## Explore the Survey
+**[Visit the survey](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/)**
 
-**[Open the website](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/)**
+| Section | What you will find |
+| --- | --- |
+| [Papers](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/papers.html) | Searchable candidates, abstracts, and screening rationale |
+| [Benchmarks](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/benchmarks.html) | Datasets and evaluation resources introduced or extended by papers |
+| [Conferences](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/conferences.html) | Candidate distributions and corpus coverage by venue and year |
+| [Research Space](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/stage5_research_space_3d.html) | A 3D view of selected papers and their citation relationships |
+| [Challenges](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/cluster_visual_space.html) | Challenge clusters, supporting evidence, and temporal views |
 
-The Overview starts with conference coverage and the screening funnel. Use
-the shared navigation to explore:
+Coverage spans **2023-2026** across ICML, ACL, ICLR, EMNLP, NeurIPS, COLM,
+and CHI, with selected preprints. The current deep-analysis snapshot contains
+**81 papers, 639 evidence rows, and 20 challenge clusters**.
 
-- **Papers**: searchable screened candidates, including abstracts and screening rationale.
-- **Benchmarks**: datasets and evaluation resources introduced or extended by candidate papers, with metadata evidence excerpts.
-- **Conferences**: screened candidate distributions by venue and year, conference browsing links, and separate raw corpus coverage counts.
-- **Research Space**: selected papers, research dimensions, and within-set citation relationships.
-- **Challenges**: challenge definitions, supporting evidence, semantic maps, and temporal/community views.
-- **About**: scope, limitations, and the literature-review and evidence-synthesis methodologies.
+## A Work in Progress
 
-Benchmark labels are LLM-assisted interpretations of titles and abstracts,
-not full-paper validation or a count of unique datasets. The Evidence Audit
-preserves original passages and locations for inspecting the
-interpretations in the challenge analysis.
+This is a research resource, not a completed systematic review. Coverage is
+uneven; LLM-generated labels and interpretations may contain errors and have
+not all been manually verified. Counts and trends describe this collection,
+not the whole field. Follow the evidence and original papers when citing findings.
 
-The Corpus Dashboard, Triage Browser, and Bucket Intersections provide broader
-coverage and screening context. On GitHub, HTML files display as source; use
-the deployed website for the interactive reports.
+This repository contains only the static website. Methodology and further
+limitations are available on the site; credentials and working PDF/text caches
+are not included.
 
-## Scope
+---
 
-- Human-agent interaction and collaboration in real-world, complex tasks.
-- Data science, analytical workflows, and related systems, methods, and benchmarks.
-- Graph analysis and reasoning as a related line of inquiry.
-- Literature across ML, NLP, and HCI, with selected arXiv preprints added manually.
-
-The current conference matrix spans 2023-2026 and ICML, ACL, ICLR, EMNLP,
-NeurIPS, COLM, and CHI. Coverage varies by venue, year, source, and track;
-the homepage identifies missing or partial coverage. A collected record does
-not mean that a person has read or endorsed the paper. The conference matrix
-does not enumerate every manually included preprint.
-
-The bundled deep-analysis snapshot contains **81 selected papers, 639 merged
-evidence rows, and 20 synthesized challenge clusters**. These describe this
-snapshot, not an exhaustive census of the field.
-
-## Human and LLM Roles
-
-Humans define the research focus, select papers for deeper analysis, interpret
-evidence, and decide which updates enter the standing research set. LLMs assist
-with metadata triage, paper-card generation, failure/limitation evidence
-extraction, and cross-paper synthesis. Code handles collection, local filtering,
-provenance checks, and visualization.
-
-Evidence extraction combines full-paper context with focused candidate
-passages. Overlapping evidence is merged while retaining provenance. Challenge
-definitions and research-gap questions are analytical interpretations, not
-claims that the original authors necessarily made.
-
-Human participation does **not** mean that every generated passage, label,
-or conclusion has been manually verified. Inspect the linked evidence and
-original papers before relying on an interpretation.
-
-## Why Living?
-
-The literature set and research questions evolve as papers and evidence are
-added. Updates are prepared as increments, compared with a saved baseline,
-and reviewed before promotion. A website deployment does not itself mean the
-underlying research analysis was rerun.
-
-This repository publishes static snapshots, not a continuously running crawler
-or live database. The website's **Last updated** timestamp refers to site
-packaging, not necessarily the collection date of every paper or analysis.
-
-## Interpretation and Limitations
-
-- Selection, keyword filtering, LLM judgments, and uneven source coverage can introduce bias. Relevant work may be missing.
-- PDF-to-text quality can affect quotations and locations; provenance makes them inspectable, not automatically correct.
-- Evidence counts are not independent paper counts. Multiple rows can come from one paper, and communities describe failures differently.
-- Yearly changes describe this selected set. They do not establish field-wide popularity, prove a problem is solved, or demonstrate causal transfer between communities.
-- Conference dates, preprint dates, and experiment timing differ; temporal order should not be read as causal evidence.
-- Semantic-map distances are a projection aid, not a definitive taxonomy or proof of a shared failure mechanism.
-
-## Repository Contents
-
-This is the **static publication repository**, separate from the working
-literature-review pipeline.
-
-- `index.html`: unified entry point and coverage overview.
-- `pages/`: bundled reports, including their embedded display data.
-- `assets/`: local visualization libraries and shared styles.
-- `coverage.json`: conference coverage snapshot used by the homepage.
-- `statistics.json`: collection counts and input hashes behind the overview funnel.
-- `manifest.json`: package file hashes and upstream source-path references.
-- `.nojekyll`: serves the bundle as plain static files on GitHub Pages.
-
-Upstream source paths in the manifest document provenance; the corresponding
-working files are not included. The bundle excludes pipeline credentials,
-PDFs, full-text caches, and the working `data/` directory. All published HTML
-and its embedded data are publicly accessible.
-
-## Hosting and Local Preview
-
-The static files live at this repository's root. GitHub Pages publishes the
-`main` branch from `/ (root)`. No build step or API key is needed to view the site.
-
-For local preview, run from this repository's root:
-
-```bash
-python3 -m http.server 8088
-```
-
-Open `http://localhost:8088/`. Use HTTP rather than opening files directly:
-the 3D report uses JavaScript modules. Deployment does not run any LLM calls
-or synchronize personal browser notes.
-
-## Credits
-
-Maintained by [@JJYDXFS](https://jjydxfs.github.io/), developed in collaboration
-with Codex. Original papers remain the work of their respective authors;
-please cite those papers for their findings. Bundled third-party libraries
+Maintained by [@JJYDXFS](https://jjydxfs.github.io/), in collaboration with
+Codex. Please credit original paper authors for their work. Bundled libraries
 retain their own license notices.
