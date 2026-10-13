@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A living survey of human-agent collaboration in data science. Explore papers, conference coverage, research spaces, and traceable challenge evidence.">
   <title>Human-Agent Collaboration in Data Science</title>
-  <link rel="stylesheet" href="assets/hub.css?v=f1be25644160">
+  <link rel="stylesheet" href="assets/hub.css?v=e784237c90bb">
   <script defer src="assets/navigation.js?v=3f240449fa48"></script>
 </head>
 <body class="hub-home">
-<header class="survey-nav"><a class="survey-brand" href="index.html">Human-Agent Survey</a><nav aria-label="Main navigation"><a href="index.html" aria-current="page">Overview</a><a href="pages/papers.html">Papers</a><a href="pages/benchmarks.html">Benchmarks</a><a href="pages/conferences.html">Conferences</a><a href="pages/stage5_research_space_3d.html">Research Space</a><a href="pages/cluster_visual_space.html">Challenges</a><a href="index.html#about">About</a><a class="hub-repo-link" href="https://github.com/JJYDXFS-Lab/awesome-human-agent-collaboration-in-data-science" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository (opens in a new tab)"><img src="assets/github.svg" width="22" height="22" alt=""></a></nav></header>
+<header class="survey-nav"><a class="survey-brand" href="index.html">Human-Agent Survey</a><nav aria-label="Main navigation"><a href="index.html" aria-current="page">Overview</a><a href="pages/papers.html">Papers</a><a href="pages/benchmarks.html">Benchmarks</a><a href="pages/conferences.html">Coverage</a><a href="pages/stage5_research_space_3d.html">Research Space</a><a href="pages/cluster_visual_space.html">Challenges</a><a class="hub-repo-link" href="https://github.com/JJYDXFS-Lab/awesome-human-agent-collaboration-in-data-science" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository (opens in a new tab)"><img src="assets/github.svg" width="22" height="22" alt=""></a></nav></header>
 <main class="hub-main" id="main">
   <section class="hub-intro">
     <p class="hub-eyebrow">A living survey &middot; ML / NLP / HCI</p>
@@ -23,19 +23,18 @@
     <p class="hub-section-intro">Broad metadata coverage supports a smaller screened collection. A human-selected subset receives full-paper analysis.</p>
     <div class="survey-funnel-layout">
       <div><div id="overview-funnel" role="img" aria-label="Literature filtering funnel"></div><noscript><ul><li>Metadata records: 81,879</li><li>Accepted papers: 61,930</li><li>Prefilter candidates: 1,180</li><li>Keep + borderline: 538</li></ul></noscript></div>
-      <div class="survey-funnel-context"><dl class="survey-stats"><div><dt>Candidate papers</dt><dd><a href="pages/papers.html">538</a><small>Keep + borderline in the main screened collection</small></dd></div><div><dt>Deep-analysis papers</dt><dd><a href="pages/stage5_research_space_3d.html">81</a><small>Human-selected papers with full-text paper cards</small></dd></div></dl><a href="pages/visualization_report.html">Full corpus dashboard &rarr;</a></div>
+      <div class="survey-funnel-context"><dl class="survey-stats"><div><dt>Candidate papers</dt><dd><a href="pages/papers.html">538</a><small>Keep + borderline in the main screened collection</small></dd></div><div><dt>Deep-analysis papers*</dt><dd><a href="pages/stage5_research_space_3d.html">81</a><small>Human-selected papers with full-text paper cards</small></dd></div></dl><p class="hub-table-note">* Includes relevant preprints manually selected for deep analysis.</p><a href="pages/visualization_report.html">Full corpus dashboard &rarr;</a></div>
     </div>
-    <p class="hub-table-note">Candidate papers include keep and borderline decisions, with rule-based automatic keeps where applicable. Screening is not a human endorsement. Deep analysis covers a selected subset, including manually added papers, rather than every candidate.</p>
+    <p class="hub-table-note"><span class="survey-verdict">keep</span> and <span class="survey-verdict">borderline</span> are LLM judgments of relevance to our research scope.</p>
   </section>
   <section class="hub-section" id="explore">
     <h2>Explore the Survey</h2>
     <div class="hub-grid survey-entry-grid">
       <a class="hub-item" href="pages/papers.html"><span class="hub-kind">Screened literature</span><h3>Papers &rarr;</h3><p>Browse candidate papers, abstracts, and relevance assessments across the reviewed literature.</p></a>
       <a class="hub-item" href="pages/benchmarks.html"><span class="hub-kind">Evaluation resources</span><h3>Benchmarks &rarr;</h3><p>Datasets, evaluation tasks, and environments introduced or extended by papers in the screened collection.</p></a>
-      <a class="hub-item" href="pages/conferences.html"><span class="hub-kind">Corpus coverage</span><h3>Conferences &rarr;</h3><p>Inspect venue and year coverage, screening counts, and the composition of the corpus.</p></a>
+      <a class="hub-item" href="pages/conferences.html"><span class="hub-kind">Corpus coverage</span><h3>Coverage &rarr;</h3><p>Inspect venue and year coverage, screening counts, and the composition of the corpus.</p></a>
       <a class="hub-item" href="pages/stage5_research_space_3d.html"><span class="hub-kind">Selected papers</span><h3>Research Space &rarr;</h3><p>Explore research directions, human and agent roles, and citation relationships in the 3D landscape.</p></a>
       <a class="hub-item" href="pages/cluster_visual_space.html"><span class="hub-kind">Cross-paper analysis</span><h3>Challenges &rarr;</h3><p>Explore challenge clusters, their changes over time, and the original evidence behind them.</p></a>
-      <a class="hub-item" href="#about"><span class="hub-kind">Methods and scope</span><h3>About &rarr;</h3><p>Understand the review process, human and LLM contributions, and the limits of the analysis.</p></a>
     </div>
   </section>
   <section class="hub-section" id="updates">
@@ -50,6 +49,6 @@
 <script src="assets/plotly.min.js?v=48152d086ecf"></script>
 <script id="overview-data" type="application/json">{"funnel": [{"label": "Metadata records", "value": 81879}, {"label": "Accepted papers", "value": 61930}, {"label": "Prefilter candidates", "value": 1180}, {"label": "Keep + borderline", "value": 538}]}</script>
 <script src="assets/overview.js?v=d7217c83022b"></script>
-<footer class="hub-footer">Copyright <a href="https://jjydxfs.github.io/">@JJYDXFS</a>. Built in collaboration with Codex.<br><!-- updated:start -->Last updated: <time datetime="2026-10-13T00:52:17+11:00">2026-10-13 00:52 AEDT</time> (website)<!-- updated:end --></footer>
+<footer class="hub-footer">Copyright <a href="https://jjydxfs.github.io/">@JJYDXFS</a>. Built in collaboration with Codex.<br><!-- updated:start -->Last updated: <time datetime="2026-10-13T11:06:14+11:00">2026-10-13 11:06 AEDT</time> (website)<!-- updated:end --></footer>
 </body>
 </html>

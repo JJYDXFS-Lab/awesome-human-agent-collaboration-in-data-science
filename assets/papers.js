@@ -13,7 +13,7 @@
       (!query || `${p.title}\n${p.abstract}`.toLowerCase().includes(query)));
   }
   function paginate(rows, page, size) {
-    size = [10, 25, 50].includes(Number(size)) ? Number(size) : 25;
+    size = [12, 24, 48].includes(Number(size)) ? Number(size) : 24;
     const pages = Math.max(1, Math.ceil(rows.length / size));
     page = Math.max(1, Math.min(pages, Math.floor(Number(page)) || 1));
     return {rows: rows.slice((page - 1) * size, page * size), page, pages, size};
