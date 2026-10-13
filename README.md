@@ -16,7 +16,7 @@ screening and synthesis, guided by human selection and interpretation.
 | Section | What you will find |
 | --- | --- |
 | [Papers](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/papers.html) | Searchable candidates, abstracts, and screening rationale |
-| [Benchmarks](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/benchmarks.html) | Datasets and evaluation resources introduced or extended by papers |
+| [Benchmarks](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/benchmarks.html) | Datasets and evaluation resources, filterable by analysis, modeling/MLE, mixed and other tasks |
 | [Coverage](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/conferences.html) | Candidate distributions and corpus coverage by venue and year |
 | [Research Space](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/stage5_research_space_3d.html) | A 3D view of selected papers and their citation relationships |
 | [Challenges](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/cluster_visual_space.html) | Challenge clusters, supporting evidence, and temporal views |
