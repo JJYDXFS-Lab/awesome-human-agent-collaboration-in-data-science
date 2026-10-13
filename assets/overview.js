@@ -1,4 +1,16 @@
 'use strict';
+const updates = document.querySelector('.survey-updates-scroll');
+if (updates) {
+  const firstTwo = [...updates.querySelectorAll('li')].slice(0, 2);
+  const sizeUpdates = () => {
+    const height = firstTwo.reduce((sum, item) => sum + item.getBoundingClientRect().height, 0);
+    updates.style.setProperty('--updates-height', `${Math.ceil(height)}px`);
+  };
+  // Measure content so two complete entries fit even when mobile text wraps.
+  const updatesObserver = new ResizeObserver(sizeUpdates);
+  firstTwo.forEach(item => updatesObserver.observe(item));
+  sizeUpdates();
+}
 const overviewData = JSON.parse(document.getElementById('overview-data').textContent);
 const funnel = document.getElementById('overview-funnel');
 const smallScreen = window.matchMedia('(max-width: 600px)');

@@ -23,7 +23,7 @@ screening and synthesis, guided by human selection and interpretation.
 
 Coverage spans **2023-2026** across ICML, ACL, ICLR, EMNLP, NeurIPS, COLM,
 and CHI, with selected preprints. The current deep-analysis snapshot contains
-**81 papers, 639 evidence rows, and 20 challenge clusters**.
+**90 papers, 706 evidence rows, and 20 challenge clusters**.
 
 ## A Work in Progress
 

@@ -1,8 +1,8 @@
 {
   "source": "data/main/corpus/merged/papers_master.json",
-  "source_sha256": "d45a8b9ea79094d53c75763b6f548fbbb9508ae61561929039dd1c6fc0cb0b56",
-  "scope_notes": "Workflow notes document NeurIPS/EMNLP 2026 skipped; promoted advisor run covers COLM 2024-25 and CHI 2023-26.",
-  "total_records": 81879,
+  "source_sha256": "38520ab058cc2a7ec330acc563fb10bd68fecbaaf342d032800b8877da2a016b",
+  "scope_notes": "Counts reflect the promoted main corpus. Coverage limitations and source details remain in the accepted impact-run manifests; missing venue-years are not zero-paper conferences.",
+  "total_records": 84898,
   "venues": [
     "ICML",
     "ACL",
@@ -170,9 +170,9 @@
     {
       "year": 2026,
       "venue": "ACL",
-      "count": 2296,
-      "status": "Partial",
-      "note": "2,296 records; Findings missing"
+      "count": 4459,
+      "status": "Scanned",
+      "note": "4,459 records"
     },
     {
       "year": 2026,
@@ -198,9 +198,9 @@
     {
       "year": 2026,
       "venue": "COLM",
-      "count": 0,
-      "status": "Not scanned",
-      "note": "Outside selected scope"
+      "count": 856,
+      "status": "Scanned",
+      "note": "856 records"
     },
     {
       "year": 2026,

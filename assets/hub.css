@@ -127,6 +127,8 @@
 @media(max-width:720px) { .survey-funnel-layout { grid-template-columns:minmax(0,1fr); gap:16px; } .hub-home .survey-funnel-context .survey-stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .hub-home .survey-stats small { display:block; margin-top:6px; color:var(--hub-muted); font-size:12px; font-weight:400; line-height:1.5; }
 .hub-home .survey-updates { margin:0; padding:0 0 0 20px; font-size:14px; }
+.survey-updates-scroll { overflow-y:auto; scrollbar-gutter:stable; max-height:var(--updates-height, 24rem); }
+.survey-updates-scroll:focus-visible { outline:2px solid var(--hub-accent); outline-offset:4px; }
 .hub-home .survey-updates li { margin:0; padding:6px 0 6px 4px; overflow-wrap:anywhere; }
 .hub-home .survey-updates li::marker { color:var(--hub-accent); }
 .hub-home .survey-updates time { color:var(--hub-muted); font-variant-numeric:tabular-nums; }
