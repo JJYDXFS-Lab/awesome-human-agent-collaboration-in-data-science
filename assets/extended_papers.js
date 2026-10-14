@@ -5,6 +5,7 @@
     return papers.filter(p => (!filters.year || String(p.year) === filters.year)
       && (!filters.venue || p.venue === filters.venue)
       && (!filters.tier || String(p.tier) === filters.tier)
+      && (!filters.bucket || p.buckets.includes(filters.bucket))
       && words.every(word => p.title.toLocaleLowerCase().includes(word)));
   }
   function paginate(rows, page, size) {
@@ -31,11 +32,11 @@
     }
   }
   let page = 1;
-  const filters = () => ({q:byId('search').value, year:byId('year').value, venue:byId('venue').value, tier:byId('tier').value});
+  const filters = () => ({q:byId('search').value, year:byId('year').value, venue:byId('venue').value, tier:byId('tier').value, bucket:byId('bucket').value});
   function readQuery() {
     const params = new URLSearchParams(location.search);
     byId('search').value = params.get('q') || '';
-    for (const key of ['year', 'venue', 'tier', 'size']) {
+    for (const key of ['year', 'venue', 'tier', 'bucket', 'size']) {
       const value = params.get(key) || (key === 'size' ? '24' : '');
       byId(key).value = [...byId(key).options].some(o => o.value === value) ? value : (key === 'size' ? '24' : '');
     }
@@ -77,7 +78,7 @@
   }
   byId('filters').addEventListener('submit', e => e.preventDefault());
   byId('search').addEventListener('input', () => {page=1; render();});
-  for (const key of ['year','venue','tier','size']) byId(key).addEventListener('change', () => {page=1; render();});
+  for (const key of ['year','venue','tier','bucket','size']) byId(key).addEventListener('change', () => {page=1; render();});
   for (const [key,delta] of [['prev',-1],['next',1]]) byId(key).addEventListener('click', () => {
     page += delta; render(); byId('count').scrollIntoView({block:'start'});
   });
