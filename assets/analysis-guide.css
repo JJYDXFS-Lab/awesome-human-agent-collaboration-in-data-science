@@ -1,0 +1,15 @@
+.survey-nav, .hub-tools { --hub-ink: #1e1e1e; --hub-muted: #686058; --hub-line: #ded5c8; --hub-accent: #0f766e; background: #fffdf8; }
+.hub-tools nav { background: #fffdf8; }
+.analysis-guide { margin: 24px 0 28px; color: #333d3b; font-size: 16px; line-height: 1.6; letter-spacing: 0; }
+.analysis-guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.analysis-guide .analysis-guide-grid h2 { font-size: 18px; line-height: 1.3; margin: 0 0 10px; color: #176d65; }
+.analysis-guide p { margin: 0; max-width: 64ch; }
+.analysis-guide .analysis-guide-link { display: inline-flex; align-items: center; gap: 14px; margin-top: 16px; padding: 9px 13px; border: 1px solid #a4c9c3; border-radius: 6px; color: #076b5c; background: #edf7f3; font-size: 14px; font-weight: 600; text-decoration: none; }
+.analysis-guide-link:hover { background: #dceee8; }
+.analysis-guide-link:focus-visible, .analysis-guide-details summary:focus-visible { outline: 2px solid #087d70; outline-offset: 4px; }
+.analysis-guide-details { margin-top: 24px; border-top: 1px solid #d9ded9; padding-top: 14px; }
+.analysis-guide-details summary { cursor: pointer; color: #4e5e58; font-size: 14px; width: fit-content; }
+.analysis-guide-details dl { max-width: 100ch; margin: 20px 0 0; }
+.analysis-guide-details dt { font-weight: 650; margin-top: 14px; }
+.analysis-guide-details dd { margin: 4px 0 0; }
+@media (max-width: 900px) { .analysis-guide-grid { grid-template-columns: 1fr; gap: 22px; } }
