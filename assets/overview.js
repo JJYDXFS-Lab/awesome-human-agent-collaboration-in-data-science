@@ -23,7 +23,7 @@ function renderFunnel() {
     texttemplate: '%{value:,.0f}',
     textposition: 'auto',
     hovertemplate: '%{y}: %{value:,.0f}<extra></extra>',
-    marker: {color: ['#117b71', '#386bb3', '#cb8525', '#8962bd']},
+    marker: {color: ['#117b71', '#cb8525', '#8962bd']},
     connector: {line: {color: '#b8c2c5', width: 1}, fillcolor: '#e7ecee'}
   }], {
     height: 360,

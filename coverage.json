@@ -1,8 +1,8 @@
 {
   "source": "data/main/corpus/merged/papers_master.json",
-  "source_sha256": "38520ab058cc2a7ec330acc563fb10bd68fecbaaf342d032800b8877da2a016b",
+  "source_sha256": "141a1162bf402f9cf1733d59e5ba1da996bef132657db600222fe05e3d316bec",
   "scope_notes": "Counts reflect the promoted main corpus. Coverage limitations and source details remain in the accepted impact-run manifests; missing venue-years are not zero-paper conferences.",
-  "total_records": 84898,
+  "total_records": 99254,
   "venues": [
     "ICML",
     "ACL",
@@ -44,9 +44,9 @@
     {
       "year": 2023,
       "venue": "NeurIPS",
-      "count": 3394,
+      "count": 3716,
       "status": "Scanned",
-      "note": "3,394 records"
+      "note": "3,716 records"
     },
     {
       "year": 2023,
@@ -93,9 +93,9 @@
     {
       "year": 2024,
       "venue": "NeurIPS",
-      "count": 4236,
+      "count": 4695,
       "status": "Scanned",
-      "note": "4,236 records"
+      "note": "4,695 records"
     },
     {
       "year": 2024,
@@ -142,9 +142,9 @@
     {
       "year": 2025,
       "venue": "NeurIPS",
-      "count": 5540,
+      "count": 6037,
       "status": "Scanned",
-      "note": "5,540 records"
+      "note": "6,037 records"
     },
     {
       "year": 2025,
@@ -184,16 +184,16 @@
     {
       "year": 2026,
       "venue": "EMNLP",
-      "count": 0,
-      "status": "Not scanned",
-      "note": "Unavailable at collection"
+      "count": 5182,
+      "status": "Scanned",
+      "note": "5,182 records"
     },
     {
       "year": 2026,
       "venue": "NeurIPS",
-      "count": 0,
-      "status": "Not scanned",
-      "note": "Unavailable at collection"
+      "count": 7896,
+      "status": "Scanned",
+      "note": "7,896 records"
     },
     {
       "year": 2026,

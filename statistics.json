@@ -1,35 +1,35 @@
 {
   "schema_version": 1,
-  "scanned_records": 84898,
-  "accepted_records": 64949,
-  "prefilter_candidates": 1301,
-  "candidate_papers": 605,
-  "keep_papers": 151,
-  "borderline_papers": 454,
-  "deep_analysis_papers": 90,
+  "scanned_records": 99254,
+  "accepted_records": 79305,
+  "prefilter_candidates": 1558,
+  "candidate_papers": 685,
+  "keep_papers": 171,
+  "borderline_papers": 514,
+  "deep_analysis_papers": 95,
   "funnel": [
     {
       "label": "Metadata records",
-      "value": 84898
+      "value": 99254
     },
     {
       "label": "Accepted papers",
-      "value": 64949
+      "value": 79305
     },
     {
       "label": "Prefilter candidates",
-      "value": 1301
+      "value": 1558
     },
     {
       "label": "Keep + borderline",
-      "value": 605
+      "value": 685
     }
   ],
   "source_hashes": {
-    "main_corpus": "38520ab058cc2a7ec330acc563fb10bd68fecbaaf342d032800b8877da2a016b",
-    "main_prefilter": "2fe5b01d5d147ce73adcf83fe9462d527eb198ecb815ec8684ef38e013336427",
-    "main_triage": "bb68ef896b9ccedb723ffdd715712cb4510d612be552358d4c433a3f942e6e3d",
-    "paper_cards": "b0877efdcd8600ef82e226310e4a651c5f8b8a32d226e6bfae53031d8caecee3"
+    "main_corpus": "141a1162bf402f9cf1733d59e5ba1da996bef132657db600222fe05e3d316bec",
+    "main_prefilter": "ba5d1cfebe23a256307a599c1b5573f3e8f75cdd147f66cdc3970980e3135c7e",
+    "main_triage": "365f8a338f1ee6fa994253a35cb7e4b6278067bc01c2e3009859cd093a92e828",
+    "paper_cards": "ab99ae1edf4d818ba2a674e7346898fdcd15b8fd6ff6d4c83772bcc5132d7276"
   },
   "scope_notes": {
     "scanned_records": "Promoted main corpus records, not deduplicated unique works.",
