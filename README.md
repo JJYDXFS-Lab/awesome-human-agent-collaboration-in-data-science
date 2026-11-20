@@ -21,7 +21,7 @@ screening and synthesis, guided by human selection and interpretation.
 | [Coverage](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/conferences.html) | Candidate distributions and corpus coverage by venue and year |
 | [Research Space](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/stage5_research_space_3d.html) | A 3D view of selected papers and their citation relationships |
 | [Challenges](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/cluster_visual_space.html) | Challenge clusters, supporting evidence, and temporal views |
-| [Resources](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/resources.html) | External links, to be added |
+| [Resources](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/pages/resources.html) | Selected surveys with short summaries and related collections |
 
 Coverage spans **2023-2026** across ICML, ACL, ICLR, EMNLP, NeurIPS, COLM,
 and CHI, with selected preprints. The current deep-analysis snapshot contains

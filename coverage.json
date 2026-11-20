@@ -1,8 +1,8 @@
 {
   "source": "data/main/corpus/merged/papers_master.json",
-  "source_sha256": "141a1162bf402f9cf1733d59e5ba1da996bef132657db600222fe05e3d316bec",
+  "source_sha256": "296caefd6086cbeb0863e5085fbb30295fe43e39dbb3cbd67427bb22141d0e40",
   "scope_notes": "Counts reflect the promoted main corpus. Coverage limitations and source details remain in the accepted impact-run manifests; missing venue-years are not zero-paper conferences.",
-  "total_records": 99254,
+  "total_records": 100224,
   "venues": [
     "ICML",
     "ACL",
@@ -191,9 +191,9 @@
     {
       "year": 2026,
       "venue": "NeurIPS",
-      "count": 7896,
+      "count": 8866,
       "status": "Scanned",
-      "note": "7,896 records"
+      "note": "8,866 records"
     },
     {
       "year": 2026,
