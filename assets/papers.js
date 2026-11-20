@@ -90,7 +90,7 @@
       const rationale = element("p", undefined, "papers-rationale");
       rationale.append(element("strong", "Screening rationale: "), document.createTextNode(p.triage_rationale || "Not available."));
       article.append(heading, element("p", [p.venue, p.year, p.track].filter(Boolean).join(" \u00b7 "), "papers-meta"),
-        element("p", p.authors || "Authors unavailable", "papers-authors"), badges,
+        badges,
         element("p", p.abstract || "Abstract unavailable.", "papers-abstract"), rationale);
       fragment.append(article);
     }
