@@ -7,6 +7,7 @@
     const query = String(filters.query || "").trim().toLowerCase();
     return papers.filter(p =>
       (["keep", "borderline"].includes(p.verdict) || (filters.includeDrop && p.verdict === "drop")) &&
+      (!filters.keepOnly || p.verdict === "keep") &&
       (!filters.year || String(p.year) === String(filters.year)) &&
       (!filters.venue || venueKey(p.venue) === venueKey(filters.venue)) &&
       (!filters.deepOnly || p.deep_analysis) &&
@@ -72,7 +73,7 @@
   function render() {
     const filtered = filterPapers(papers, {query: byId("search").value,
       year: byId("year").value, venue: byId("venue").value,
-      includeDrop: byId("drop").checked, deepOnly: byId("deep").checked});
+      includeDrop: byId("drop").checked, keepOnly: byId("keep").checked, deepOnly: byId("deep").checked});
     const batch = paginate(filtered, page, byId("size").value);
     page = batch.page;
     const fragment = document.createDocumentFragment();
@@ -104,7 +105,7 @@
   }
   byId("filters").addEventListener("submit", event => event.preventDefault());
   byId("search").addEventListener("input", () => { page = 1; render(); });
-  for (const field of ["year", "venue", "drop", "deep", "size"]) {
+  for (const field of ["year", "venue", "drop", "keep", "deep", "size"]) {
     byId(field).addEventListener("change", () => { page = 1; writeQuery(); render(); });
   }
   for (const [id, delta] of [["prev", -1], ["next", 1]]) {
