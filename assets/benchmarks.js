@@ -15,6 +15,12 @@
       (!filters.venue || p.venue === filters.venue) &&
       (!query || [...p.resource_names, p.task_summary, p.title].join("\n").toLowerCase().includes(query)));
   }
+  function paginate(rows, page, size) {
+    size = [12, 24, 48].includes(Number(size)) ? Number(size) : 24;
+    const pages = Math.max(1, Math.ceil(rows.length / size));
+    page = Math.max(1, Math.min(pages, Math.floor(Number(page)) || 1));
+    return {rows: rows.slice((page - 1) * size, page * size), page, pages, size};
+  }
   function paperHref(value) {
     if (typeof value !== "string" || /[\u0000-\u001f\u007f\\]/.test(value)) return "";
     try {
@@ -22,7 +28,7 @@
       return ["http:", "https:"].includes(url.protocol) && url.hostname ? url.href : "";
     } catch (_) { return ""; }
   }
-  if (typeof module !== "undefined" && module.exports) module.exports = {filterBenchmarks, paperHref};
+  if (typeof module !== "undefined" && module.exports) module.exports = {filterBenchmarks, paginate, paperHref};
   if (typeof document === "undefined") return;
   const data = document.getElementById("benchmarks-data");
   if (!data) return;
@@ -44,11 +50,14 @@
     }
   }
   let category = "";
+  let page = 1;
   const categoryButtons = [...byId("categories").querySelectorAll("button")];
   function render() {
     const matching = filterBenchmarks(papers, {query: byId("search").value, type: byId("type").value,
       year: byId("year").value, venue: byId("venue").value, includeUncertain: byId("uncertain").checked});
     const filtered = matching.filter(p => !category || (p.task_category || "not_specified") === category);
+    const batch = paginate(filtered, page, byId("size").value);
+    page = batch.page;
     for (const button of categoryButtons) {
       const key = button.dataset.category;
       const count = matching.filter(p => !key || (p.task_category || "not_specified") === key).length;
@@ -57,7 +66,7 @@
       button.hidden = key === "not_specified" && !count && category !== key;
     }
     const fragment = document.createDocumentFragment();
-    for (const p of filtered) {
+    for (const p of batch.rows) {
       const article = element("article", undefined, "benchmarks-entry");
       const heading = element("h2");
       const href = paperHref(p.paper_link);
@@ -84,16 +93,30 @@
     if (!filtered.length) fragment.append(element("p", "No matching papers."));
     byId("results").replaceChildren(fragment);
     const uncertain = filtered.filter(p => p.contribution === "uncertain").length;
-    byId("count").textContent = `${filtered.length} papers${uncertain ? ` (${uncertain} uncertain contributions)` : " introducing or extending resources"}`;
+    const start = filtered.length ? (page - 1) * batch.size + 1 : 0;
+    byId("count").textContent = `${filtered.length} papers${uncertain ? ` (${uncertain} uncertain contributions)` : " introducing or extending resources"}; showing ${start}-${Math.min(page * batch.size, filtered.length)}`;
+    byId("position").textContent = `Page ${page} of ${batch.pages}`;
+    byId("prev").disabled = page === 1;
+    byId("next").disabled = page === batch.pages;
   }
   byId("filters").addEventListener("submit", event => event.preventDefault());
   for (const button of categoryButtons) button.addEventListener("click", () => {
     category = button.dataset.category;
+    page = 1;
     render();
   });
-  byId("search").addEventListener("input", render);
-  for (const field of ["type", "year", "venue", "uncertain"]) byId(field).addEventListener("change", render);
+  const resetPage = () => { page = 1; render(); };
+  byId("search").addEventListener("input", resetPage);
+  for (const field of ["type", "year", "venue", "uncertain", "size"]) byId(field).addEventListener("change", resetPage);
+  for (const [id, delta] of [["prev", -1], ["next", 1]]) {
+    byId(id).addEventListener("click", () => {
+      page += delta;
+      render();
+      byId("count").scrollIntoView({block: "start"});
+    });
+  }
   render();
   byId("filters").hidden = false;
   byId("categories").hidden = false;
+  byId("pagination").hidden = false;
 })();
