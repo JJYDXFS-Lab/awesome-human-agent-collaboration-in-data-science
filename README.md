@@ -68,6 +68,9 @@ with papers ordered newest first within each community.
 - [![COLM 2026](https://img.shields.io/badge/COLM-2026-52796f?style=flat&labelColor=555555)](<https://openreview.net/forum?id=r231Adxjfl>) [**COMPASS: Benchmarking Constrained Optimization in LLM Agents**](<https://openreview.net/forum?id=r231Adxjfl>)
   COMPASS is a core interactive-agent benchmark showing that frontier LLM agents can often satisfy user constraints but still fail to strategically search for utility-optimal solutions in multi-turn, tool-mediated decision tasks.
 
+- [![SIGMOD Companion 2026](https://img.shields.io/badge/SIGMOD%20Companion-2026-52796f?style=flat&labelColor=555555)](<https://doi.org/10.1145/3788853.3803099>) [**ConDABench: Interactive Evaluation of Language Models for Data Analysis**](<https://doi.org/10.1145/3788853.3803099>)
+  ConDABench is a core benchmark and evaluation framework for testing whether language-model agents can carry out realistic, mixed-initiative conversational data analysis under ambiguity and over longer interactions.
+
 - [![ICLR 2026](https://img.shields.io/badge/ICLR-2026-52796f?style=flat&labelColor=555555)](<https://openreview.net/forum?id=EtzJy9yI5J>) [**DAComp: Benchmarking Data Agents across the Full Data Intelligence Lifecycle**](<https://openreview.net/forum?id=EtzJy9yI5J>)
   DAComp is a strong core benchmark for autonomous enterprise data agents because it covers both repository-level data engineering and open-ended analysis, but it is only indirectly relevant to the survey’s human-agent division-of-labor focus.
 
@@ -101,9 +104,6 @@ with papers ordered newest first within each community.
 - [![NeurIPS 2026](https://img.shields.io/badge/NeurIPS-2026-52796f?style=flat&labelColor=555555)](<https://openreview.net/forum?id=ao3zijumY7>) [**LLM-Based Multi-Agent Blackboard System for Information Discovery in Data Science**](<https://openreview.net/forum?id=ao3zijumY7>)
   A blackboard-based autonomous data-science system replaces explicit specialist routing with self-selected contributions, providing a method reference for coordination and discovery rather than direct evidence about human-agent collaboration.
 
-- [![arXiv 2026](https://img.shields.io/badge/arXiv-2026-52796f?style=flat&labelColor=555555)](<https://arxiv.org/abs/2605.30434>) [**LongDS-Bench: On the Failure of Long-Horizon Agentic Data Analysis**](<https://arxiv.org/abs/2605.30434>)
-  A core data-analysis benchmark paper showing that autonomous agents struggle badly with long-horizon analytical state management, making it strong motivation and evaluation context for human oversight and recovery mechanisms.
-
 - [![ICLR 2026](https://img.shields.io/badge/ICLR-2026-52796f?style=flat&labelColor=555555)](<https://openreview.net/forum?id=jHDZEUgS4r>) [**MedAgentGym: A Scalable Agentic Training Environment for Code-Centric Reasoning in Biomedical Data Science**](<https://openreview.net/forum?id=jHDZEUgS4r>)
   A strong benchmark/training-environment paper for autonomous biomedical data-science agents that is highly relevant to code-centric analytical workflows but only indirectly relevant to human-agent collaboration.
 
@@ -135,9 +135,6 @@ with papers ordered newest first within each community.
 
 - [![ICML 2025](https://img.shields.io/badge/ICML-2025-52796f?style=flat&labelColor=555555)](<https://openreview.net/forum?id=flKhxGTBj2>) [**Are Large Language Models Ready for Multi-Turn Tabular Data Analysis?**](<https://openreview.net/forum?id=flKhxGTBj2>)
   A core benchmark paper for conversational tabular data analysis that operationalizes multi-turn clarification and feedback in data-science workflows, while offering only simulated rather than fully real human-agent collaboration evidence.
-
-- [![NeurIPS 2025](https://img.shields.io/badge/NeurIPS-2025-52796f?style=flat&labelColor=555555)](<https://arxiv.org/abs/2510.13835>) [**ConDABench: Interactive Evaluation of Language Models for Data Analysis**](<https://arxiv.org/abs/2510.13835>)
-  ConDABench is a core benchmark and evaluation framework for testing whether language-model agents can carry out realistic, mixed-initiative conversational data analysis under ambiguity and over longer interactions.
 
 - [![ICLR 2025](https://img.shields.io/badge/ICLR-2025-52796f?style=flat&labelColor=555555)](<https://openreview.net/forum?id=DSsSPr0RZJ>) [**DSBench: How Far Are Data Science Agents from Becoming Data Science Experts?**](<https://openreview.net/forum?id=DSsSPr0RZJ>)
   DSBench is a strong end-to-end benchmark for realistic autonomous data science agents, valuable for mapping current automation limits in analytical workflows but not for studying collaborative human-agent labor directly.
@@ -207,6 +204,9 @@ with papers ordered newest first within each community.
 - [![ACL Findings 2026](https://img.shields.io/badge/ACL%20Findings-2026-52796f?style=flat&labelColor=555555)](<https://aclanthology.org/2026.findings-acl.1729/>) [**InsightEval: An Expert-Curated Benchmark for Assessing Insight Discovery in LLM-Driven Data Agents**](<https://aclanthology.org/2026.findings-acl.1729/>)
   InsightEval is a core data-science agent benchmark that improves InsightBench with expert-curated tabular insight tasks and evaluates agents by precision, recall, F1, summary quality, and novelty rather than simple ground-truth matching.
 
+- [![EMNLP 2026](https://img.shields.io/badge/EMNLP-2026-52796f?style=flat&labelColor=555555)](<https://aclanthology.org/2026.emnlp-main.584/>) [**LongDS-Bench: On the Failure of Long-Horizon Agentic Data Analysis**](<https://aclanthology.org/2026.emnlp-main.584/>)
+  A core data-analysis benchmark paper showing that autonomous agents struggle badly with long-horizon analytical state management, making it strong motivation and evaluation context for human oversight and recovery mechanisms.
+
 - [![ACL Findings 2026](https://img.shields.io/badge/ACL%20Findings-2026-52796f?style=flat&labelColor=555555)](<https://aclanthology.org/2026.findings-acl.1506/>) [**PrefIx: Understand and Adapt to User Preference in Human-Agent Interaction**](<https://aclanthology.org/2026.findings-acl.1506/>)
   PrefIx is a core human-agent interaction benchmark that makes interaction quality measurable by treating confirmations, explanations, pacing, and related behaviors as structured tools and evaluating preference alignment alongside task accuracy.
 
@@ -233,7 +233,7 @@ with papers ordered newest first within each community.
 - [![EMNLP 2025](https://img.shields.io/badge/EMNLP-2025-52796f?style=flat&labelColor=555555)](<https://aclanthology.org/2025.emnlp-main.466/>) [**Can LLM s Help You at Work? A Sandbox for Evaluating LLM Agents in Enterprise Environments**](<https://aclanthology.org/2025.emnlp-main.466/>)
   A useful boundary benchmark paper that defines a realistic enterprise task landscape for autonomous LLM agents, but is not a core paper on human-agent collaboration or division of labor.
 
-- [![NAACL 2025](https://img.shields.io/badge/NAACL-2025-52796f?style=flat&labelColor=555555)](<https://arxiv.org/abs/2501.16609>) [**CowPilot: A Framework for Autonomous and Human-Agent Collaborative Web Navigation**](<https://arxiv.org/abs/2501.16609>)
+- [![NAACL 2025](https://img.shields.io/badge/NAACL-2025-52796f?style=flat&labelColor=555555)](<https://aclanthology.org/2025.naacl-demo.17/>) [**CowPilot: A Framework for Autonomous and Human-Agent Collaborative Web Navigation**](<https://aclanthology.org/2025.naacl-demo.17/>)
   CowPilot is a mixed-initiative web-agent framework that operationalizes human oversight, intervention, and handoff, showing that small amounts of human correction can dramatically improve agent task success.
 
 - [![ACL Findings 2025](https://img.shields.io/badge/ACL%20Findings-2025-52796f?style=flat&labelColor=555555)](<https://aclanthology.org/2025.findings-acl.1016/>) [**Data Interpreter: An LLM Agent for Data Science**](<https://aclanthology.org/2025.findings-acl.1016/>)
@@ -271,7 +271,7 @@ with papers ordered newest first within each community.
 - [![ACL 2024](https://img.shields.io/badge/ACL-2024-52796f?style=flat&labelColor=555555)](<https://aclanthology.org/2024.acl-long.61/>) [**Tell Me More! Towards Implicit User Intention Understanding of Language Model Driven Agents**](<https://aclanthology.org/2024.acl-long.61/>)
   An interaction-centric agent paper that benchmarks and improves an LLM agent’s ability to ask clarifying questions and convert vague user requests into explicit executable goals before autonomous action.
 
-- [![SIGIR 2024](https://img.shields.io/badge/SIGIR-2024-52796f?style=flat&labelColor=555555)](<https://arxiv.org/abs/2404.12670>) [**Towards Human-centered Proactive Conversational AI**](<https://arxiv.org/abs/2404.12670>)
+- [![SIGIR 2024](https://img.shields.io/badge/SIGIR-2024-52796f?style=flat&labelColor=555555)](<https://doi.org/10.1145/3626772.3657843>) [**Towards Human-centered Proactive Conversational AI**](<https://doi.org/10.1145/3626772.3657843>)
   A human-centered perspective paper that reframes proactive conversational agents around mixed initiative, adaptivity, civility, trust, and user control rather than pure task efficiency.
 
 #### 2023
