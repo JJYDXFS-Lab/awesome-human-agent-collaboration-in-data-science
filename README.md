@@ -1,5 +1,6 @@
 # Awesome Human-Agent Collaboration in Data Science<br>[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
+[![Web Page](https://img.shields.io/badge/%F0%9F%8C%90%20Web%20Page-52796f?style=flat)](https://jjydxfs-lab.github.io/awesome-human-agent-collaboration-in-data-science/)
 [![Content: CC BY 4.0](https://img.shields.io/badge/Content-CC%20BY%204.0-52796f?style=flat)](LICENSE.md#survey-content-cc-by-40)
 [![Code: MIT](https://img.shields.io/badge/Code-MIT-52796f?style=flat)](LICENSE.md#website-code-mit)
 
@@ -379,7 +380,7 @@ with papers ordered newest first within each community.
 The collection grows as we discover and review new work. Paper suggestions,
 corrections, and useful resources
 are welcome via [Issues](https://github.com/JJYDXFS-Lab/awesome-human-agent-collaboration-in-data-science/issues).
-Include a paper or resource link and a corresponding short discussion. For corrections, identify the entry and the information to update. This list is also included in [Awesome Data Science](https://github.com/academic/awesome-datascience#other-awesome-lists).
+Include a paper or resource link and a corresponding short discussion. For corrections, identify the entry and the information to update. This list is also included in [Awesome Data Science](https://github.com/academic/awesome-datascience#other-awesome-lists:~:text=Awesome%20Human%2DAgent%20Collaboration%20in%20Data%20Science).
 Explore their collection for broader data science resources.
 
 List format inspired by [Awesome](https://github.com/sindresorhus/awesome)
