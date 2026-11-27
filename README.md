@@ -388,7 +388,7 @@ and the [Awesome manifesto](https://github.com/sindresorhus/awesome/blob/main/aw
 
 ---
 
-Maintained by [@JJYDXFS](https://jjydxfs.github.io/), in collaboration with Codex.
+Maintained by [@JJYDXFS](https://jjydxfs.github.io/academic), in collaboration with Codex.
 Please credit original paper authors. Bundled libraries retain their license notices.
 Original content: CC BY 4.0. Original website code: MIT. See [licensing scope](LICENSE.md).
 If useful, consider giving the repository [a star](https://github.com/JJYDXFS-Lab/awesome-human-agent-collaboration-in-data-science)
